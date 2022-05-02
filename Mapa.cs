@@ -12,10 +12,8 @@ public class Mapa
     }
 
     // Métodos
-    public void RenderSala()
+    public void RenderMapa(Graphics background, Graphics blocos, Graphics entidades)
     {
-        this.salaAtual.RenderBackground();
-        this.salaAtual.RenderBlocos();
-        this.salaAtual.RenderEntities();
+        this.salaAtual.RenderSala(background, blocos, entidades);
     }
 }

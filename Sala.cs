@@ -47,15 +47,28 @@ public class Sala
 
     }
 
-    public void RenderBlocos()
+    // Renderiza a sala
+    public void RenderSala(Graphics background, Graphics blocos, Graphics entidades)
+    {
+        RenderBackground(background);
+        RenderBlocos(blocos);
+        RenderEntities(entidades);
+    }
+
+    private void RenderBackground(Graphics background)
+    {
+
+    }
+
+    private void RenderBlocos(Graphics blocos)
     {
         foreach (Bloco bloco in this.blocos)
         {
-
+            bloco.RenderBloco(blocos);
         }
     }
 
-    public void RenderEntities()
+    private void RenderEntities(Graphics entidades)
     {
 
     }
