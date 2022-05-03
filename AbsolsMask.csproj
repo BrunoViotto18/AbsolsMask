@@ -9,8 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Sprites\Blocos\" />
-    <Folder Include="Sprites\Entidades\" />
+    <Compile Remove="Sprites\**" />
+    <EmbeddedResource Remove="Sprites\**" />
+    <None Remove="Sprites\**" />
   </ItemGroup>
 
 </Project>
