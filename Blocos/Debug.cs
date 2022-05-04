@@ -9,7 +9,7 @@ public class Debug : Bloco
         get
         {
             if (Debug.sprite == null)
-                Debug.sprite = new Bitmap("Sprites/Blocos/blocoDebug.png");
+                Debug.sprite = new Bitmap("Sprites/Blocos/debug.png");
             return sprite;
         }
     }

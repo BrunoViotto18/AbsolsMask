@@ -2,9 +2,9 @@
 
 public class Entidades
 {
-    private Entidade player;
-    private List<Entidade> inimigos;
-    private Entidade? boss;
-    private List<Entidade> particulas;
+    public Entidade player;
+    public List<Entidade> inimigos;
+    public Entidade? boss;
+    public List<Entidade> particulas;
 }
 

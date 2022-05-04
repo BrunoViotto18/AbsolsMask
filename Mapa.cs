@@ -21,8 +21,8 @@ public class Mapa
     }
 
     // Métodos
-    public void RenderMapa(Graphics gSala, Graphics gCamera)
+    public void RenderMapa(Graphics gSala)
     {
-        this.salaAtual.RenderSala(gSala, gCamera);
+        this.salaAtual.RenderSala(gSala);
     }
 }

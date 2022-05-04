@@ -17,11 +17,19 @@ public class Sala
     public int getSalaHeight()
         => blocos.GetLength(1)*32;
 
+    public Entidade Player
+    {
+        get => this.entidades.player;
+    }
+
 
     // Construtor
     public Sala()
     {
-        this.salaImage = new Bitmap("./sprites/salas/salaDebug2.png");
+        this.entidades = new Entidades();
+        this.entidades.player = new Player(10, 10, 130, 130, 10);
+        //this.entidades.player = new Player(550, 100);
+        this.salaImage = new Bitmap("Sprites/Salas/debug1.png");
         buildRoom();
     }
 
@@ -62,26 +70,23 @@ public class Sala
     /* Métodos renderizadores */
 
     // Renderiza a sala
-    public void RenderSala(Graphics gSala, Graphics gCamera)
+    public void RenderSala(Graphics gSala)
     {
         gSala.Clear(Color.Fuchsia);
-        gCamera.Clear(Color.Fuchsia);
 
         RenderBackground(gSala);
         RenderBlocos(gSala);
         RenderEntities(gSala);
-
-        RenderCamera(gSala, gCamera);
     }
 
     // Renderiza o background
-    private void RenderBackground(Graphics background)
+    private void RenderBackground(Graphics g)
     {
 
     }
 
     // Renderiza os blocos
-    private void RenderBlocos(Graphics blocos)
+    private void RenderBlocos(Graphics g)
     {
         for (int linha = 0; linha < this.blocos.GetLength(0); linha++)
         {
@@ -89,20 +94,14 @@ public class Sala
             {
                 if (this.blocos[linha, coluna] == null)
                     continue;
-                this.blocos[linha, coluna].RenderBloco(linha, coluna, blocos);
+                this.blocos[linha, coluna].RenderBloco(linha, coluna, g);
             }
         }
     }
 
     // Renderiza as entidades
-    private void RenderEntities(Graphics entidades)
+    private void RenderEntities(Graphics g)
     {
-
-    }
-
-    // Renderiza a Camera do jogo
-    private void RenderCamera(Graphics gSala, Graphics gCamera)
-    {
-        //gCamera.DrawImage(imagem da sala, retangulo da sala, retangula da camera)
+        this.entidades.player.RenderSelf(g);
     }
 }

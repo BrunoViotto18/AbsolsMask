@@ -74,12 +74,38 @@ public class Game : Form
             // 
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.pbTela);
+            this.MaximizeBox = false;
             this.Name = "Game";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
             this.Load += new System.EventHandler(this.Game_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbTela)).EndInit();
             this.ResumeLayout(false);
 
+    }
+
+    private void RenderGame(Graphics gSala)
+    {
+        this.map.RenderMapa(gSala);
+    }
+
+    private void RenderCamera(Bitmap bmpSala, Graphics gCamera)
+    {
+        gCamera.Clear(Color.Fuchsia);
+        int cameraTop = this.map.SalaAtual.Player.Y + pbTela.Height / 2;
+        int cameraLeft = this.map.SalaAtual.Player.X + pbTela.Width / 2;
+        
+        if (cameraTop < 0)
+            cameraTop = 0;
+        else if (cameraTop + pbTela.Height > this.map.SalaAtual.getSalaHeight())
+            cameraTop = this.map.SalaAtual.getSalaHeight() - pbTela.Height;
+
+        if (cameraLeft < 0)
+            cameraLeft = 0;
+        else if (cameraLeft + pbTela.Width > this.map.SalaAtual.getSalaWidth())
+            cameraLeft = this.map.SalaAtual.getSalaWidth() - pbTela.Width;
+
+        gCamera.DrawImage(bmpSala, new Rectangle(0, 0, pbTela.Height, pbTela.Width), new Rectangle(cameraLeft, cameraTop, pbTela.Height, pbTela.Width), GraphicsUnit.Pixel);
     }
 
 
@@ -109,7 +135,8 @@ public class Game : Form
         // Delegação do tick
         this.tm.Tick += delegate
         {
-            this.map.RenderMapa(gSala, gCamera);
+            this.RenderGame(gSala);
+            this.RenderCamera(bmpCamera, gSala);
             pbTela.Image = bmpCamera;
         };
 
