@@ -5,8 +5,6 @@ public abstract class Entidade
     protected int maxHP;
     protected int hp;
     protected Posicao position;
-    protected int gravidadeX;
-    protected int gravidadeY;
 
     // GET & SET
     public int X
@@ -54,7 +52,11 @@ public abstract class Entidade
         this.gravidadeY = gravidadeY;
     }
 
+    public void CalculateSelfMoviment(Bloco[,] blocos, Entidades entidades)
+    {
+        this.position.CalculateMoviment(blocos, entidades);
+    }
+
     public abstract void RenderSelf(Graphics g);
-    //public abstract void CalculateMoviment(List<Bloco> blocos, List<Entidade> entidades);
     //private abstract void CalculateCollision(List<Bloco> blocos, List<Entidade> entidades);
 }

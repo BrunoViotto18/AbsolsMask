@@ -2,6 +2,7 @@
 
 public class Mapa
 {
+    // Atributos
     private Sala salaAtual;
     private Sala[,] salas;
 
@@ -20,7 +21,16 @@ public class Mapa
         this.salaAtual = new Sala();
     }
 
+
     // Métodos
+
+    // Calcula os movimentos do jogo
+    public void CalculateMapMoviments()
+    {
+        this.salaAtual.CalculateEntitiesMoviment();
+    }
+
+    // Renderiza o mapa
     public void RenderMapa(Graphics gSala)
     {
         this.salaAtual.RenderSala(gSala);

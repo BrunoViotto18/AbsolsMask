@@ -10,6 +10,7 @@ public class Sala
     private List<Entradas> entradas;
     private TamanhoSala tamanhoSala;
 
+
     // GET & SET
     public int getSalaWidth()
         => blocos.GetLength(0)*32;
@@ -19,7 +20,7 @@ public class Sala
 
     public Entidade Player
     {
-        get => this.entidades.player;
+        get => this.entidades.Player;
     }
 
 
@@ -27,9 +28,9 @@ public class Sala
     public Sala()
     {
         this.entidades = new Entidades();
-        this.entidades.player = new Player(10, 10, 130, 130, 10);
+        this.entidades.Player = new Player(10, 10, 130, 130, 10);
         //this.entidades.player = new Player(550, 100);
-        this.salaImage = new Bitmap("Sprites/Salas/debug1.png");
+        this.salaImage = Properties.Salas.debug1;
         buildRoom();
     }
 
@@ -61,9 +62,9 @@ public class Sala
 
     /* Métodos */
 
-    public void CalculateEntityMoviment()
+    public void CalculateEntitiesMoviment()
     {
-
+        this.entidades.Player.CalculateSelfMoviment(this.blocos, this.entidades);
     }
 
 
@@ -102,6 +103,6 @@ public class Sala
     // Renderiza as entidades
     private void RenderEntities(Graphics g)
     {
-        this.entidades.player.RenderSelf(g);
+        this.entidades.Player.RenderSelf(g);
     }
 }

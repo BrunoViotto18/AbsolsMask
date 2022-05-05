@@ -84,16 +84,28 @@ public class Game : Form
 
     }
 
+
+    private void CalculateGameMoviments()
+    {
+        this.map.CalculateMapMoviments();
+    }
+
+
+    /* Métodos de Renderização */
+
+    // Renderiza o jogo (Sala)
     private void RenderGame(Graphics gSala)
     {
         this.map.RenderMapa(gSala);
     }
 
+    // Renderiza a camera do jogo
     private void RenderCamera(Bitmap bmpSala, Graphics gCamera)
     {
         gCamera.Clear(Color.Fuchsia);
-        int cameraTop = this.map.SalaAtual.Player.Y + pbTela.Height / 2;
-        int cameraLeft = this.map.SalaAtual.Player.X + pbTela.Width / 2;
+
+        int cameraTop = this.map.SalaAtual.Player.Y - pbTela.Height / 2;
+        int cameraLeft = this.map.SalaAtual.Player.X - pbTela.Width / 2;
         
         if (cameraTop < 0)
             cameraTop = 0;
@@ -105,8 +117,9 @@ public class Game : Form
         else if (cameraLeft + pbTela.Width > this.map.SalaAtual.getSalaWidth())
             cameraLeft = this.map.SalaAtual.getSalaWidth() - pbTela.Width;
 
-        gCamera.DrawImage(bmpSala, new Rectangle(0, 0, pbTela.Height, pbTela.Width), new Rectangle(cameraLeft, cameraTop, pbTela.Height, pbTela.Width), GraphicsUnit.Pixel);
+        gCamera.DrawImage(bmpSala, new Rectangle(0, 0, pbTela.Width, pbTela.Height), new Rectangle(cameraLeft, cameraTop, pbTela.Width, pbTela.Height), GraphicsUnit.Pixel);
     }
+
 
 
     private void Game_Load(object sender, EventArgs e)
@@ -135,8 +148,12 @@ public class Game : Form
         // Delegação do tick
         this.tm.Tick += delegate
         {
-            this.RenderGame(gSala);
-            this.RenderCamera(bmpCamera, gSala);
+            // Calculando movimentos(Eventos?)
+            CalculateGameMoviments();
+
+            // Renderizando o jogo
+            RenderGame(gSala);
+            RenderCamera(bmpSala, gCamera);
             pbTela.Image = bmpCamera;
         };
 
