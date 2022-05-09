@@ -131,6 +131,7 @@ public class Game : Form
         rng = new Random(this.seed);
         this.tm = new System.Windows.Forms.Timer();
         this.tm.Interval = 16;
+        this.tm.Interval = 200;
 
 
         // Criação de objetos
@@ -144,6 +145,11 @@ public class Game : Form
         gCamera = Graphics.FromImage(bmpCamera);
         gSala = Graphics.FromImage(bmpSala);
 
+        this.KeyPreview = true;
+        this.KeyDown += (s, e) =>
+        {
+            KeyPressManager.AddKey(e.KeyCode);
+        };
 
         // Delegação do tick
         this.tm.Tick += delegate

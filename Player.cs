@@ -5,7 +5,7 @@ public class Player : Entidade
     private Mascara mascaraAtual;
     private List<Mascara> mascaras;
 
-    public Player(int hp, int maxHp, int X, int Y, int gravidadeY, int gravidadeX = 0) : base(hp, maxHp, X, Y, gravidadeY, gravidadeX)
+    public Player(int hp, int maxHp, int X, int Y) : base(hp, maxHp, X, Y)
     {
 
     }

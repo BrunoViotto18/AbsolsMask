@@ -12,7 +12,7 @@ public class Entidades
         get => player;
         set
         {
-            if (value.GetType() != new Player(0, 0, 0, 0, 0).GetType())
+            if (value.GetType() != new Player(0, 0, 0, 0).GetType())
                 return;
 
             player = value;

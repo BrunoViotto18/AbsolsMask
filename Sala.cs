@@ -28,7 +28,7 @@ public class Sala
     public Sala()
     {
         this.entidades = new Entidades();
-        this.entidades.Player = new Player(10, 10, 130, 130, 10);
+        this.entidades.Player = new Player(10, 10, 150, 150);
         //this.entidades.player = new Player(550, 100);
         this.salaImage = Properties.Salas.debug1;
         buildRoom();

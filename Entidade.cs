@@ -27,29 +27,27 @@ public abstract class Entidade
 
     public int Top
     {
-        get => this.Y - this.Height / 2;
+        get => position.Top;
     }
     public int Right
     {
-        get => this.X + this.Width / 2;
+        get => position.Right;
     }
     public int Bottom
     {
-        get => this.Y + this.Height / 2;
+        get => position.Bottom;
     }
     public int Left
     {
-        get => this.X - this.Height / 2;
+        get => position.Left;
     }
 
     // Construtor
-    public Entidade(int hp, int maxHp, int X, int Y, int gravidadeY, int gravidadeX = 0)
+    public Entidade(int hp, int maxHp, int X, int Y)
     {
         this.hp = hp;
         this.maxHP = maxHp;
         this.position = new Posicao(X, Y);
-        this.gravidadeX = gravidadeX;
-        this.gravidadeY = gravidadeY;
     }
 
     public void CalculateSelfMoviment(Bloco[,] blocos, Entidades entidades)
