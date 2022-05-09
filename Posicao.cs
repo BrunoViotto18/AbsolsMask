@@ -103,7 +103,7 @@ public class Posicao
 
 
     // Construtor
-    public Posicao(int X, int Y, int maxSpeedX=6, int maxSpeedY=6, int dx=32, int dy=32, int speedX=0, int speedY=0, int gravidadeY=5, int gravidadeX=0)
+    public Posicao(int X, int Y, int maxSpeedX=6, int maxSpeedY=6, int dx=5, int dy=5, int speedX=0, int speedY=0, int gravidadeY=5, int gravidadeX=0)
     {
         this.x = X;
         this.y = Y;
@@ -162,67 +162,49 @@ public class Posicao
 
     private void calculateCollision(Bloco[,] blocos, Entidades entidades)
     {
+        int salaWidth = blocos.GetLength(0) * 32;
+        int salaHeight = blocos.GetLength(1) * 32;
+
         // Calcualte OutOfBounds
         if (Top < 0)
             Top = 0;
         if (Left < 0)
             Left = 0;
-        if (Right > blocos.GetLength(0) * 32)
-            Right = blocos.GetLength(0) * 32;
-        if (Bottom > blocos.GetLength(1) * 32)
-            Bottom = blocos.GetLength(1) * 32;
+        if (Right > salaWidth)
+            Right = salaWidth;
+        if (Bottom > salaHeight)
+            Bottom = salaHeight;
 
-        int[] border = new int[4];
+        int top = Top / 32;
+        int topN = 32 - Top % 32;
+        while (++top < blocos.GetLength(1) && topN < Height)
+        {
+            if (blocos[Left / 32, top] == null)
+                break;
+
+            topN += 32;
+        }
+
+
 
         // Calculate Top, Bottom
-        for (int i = Left / 32; i <= Right / 32; i++)
+        for (int i = Left / 32 + 1; i <= Right / 32 - 1; i++)
         {
             if (blocos[i, Top / 32] != null)
-                border[0] += 32 - Top % 32;
+                Top = (Top / 32 + 1) * 32;
 
             if (blocos[i, Bottom / 32] != null)
-                border[2] += Bottom % 32 + 1;
+                Bottom = Bottom / 32 * 32 - 1;
         }
 
         // Calculate Right, Left
-        for (int i = Top / 32; i <= Bottom / 32; i++)
+        for (int i = Top / 32 + 1; i <= Bottom / 32 - 1; i++)
         {
             if (blocos[Right / 32, i] != null)
-                border[1] += Right % 32 + 1;
+                Right = Right / 32 * 32 - 1;
 
             if (blocos[Left / 32, i] != null)
-                border[3] += 32 - Left % 32;
-        }
-
-        // Calculate multiple collisions
-        border.OrderBy(p => p);
-        for (int borda = 0; borda < border.Length; borda++)
-        {
-            if (border[borda] == 0)
-                continue;
-
-            switch (borda)
-            {
-                case 0:
-                    Top = (Top / 32 + 1) * 32;
-                    speedY = 0;
-                    break;
-
-                case 1:
-                    Right = (Right / 32) * 32 - 1;
-                    speedX = 0;
-                    break;
-
-                case 2:
-                    Bottom = (Bottom / 32) * 32 - 1;
-                    speedY = 0;
-                    break;
-
-                case 3:
-                    Left = (Left / 32 + 1) * 32;
-                    speedX = 0;
-                    break;
-            }
+                Left = (Left / 32 + 1) * 32;
         }
     }
 
