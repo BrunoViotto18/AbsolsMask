@@ -160,6 +160,93 @@ public class Posicao
         tick = 0;
     }
 
+    private int[] calculateVerticalCollision(Bloco[,] blocos, Entidades entidades)
+    {
+        int[] bordas = new int[2];
+
+        for (int i = Left / 32; i <= Right / 32; i++)
+        {
+            if (blocos[i, Top / 32] != null)
+            {
+                int top = 32 - Top % 32;
+                for (int j = Top / 32 + 1; j <= Top / 32 + 1 + Height / 32; j++)
+                {
+                    if (top > bordas[0] && bordas[0] != 0 || blocos[i, j - 1] == null)
+                        break;
+                    bordas[0] += top;
+                    top = 32;
+                }
+            }
+
+            if (blocos[i, Bottom / 32] != null)
+            {
+                int bottom = Bottom % 32 + 1;
+                for (int j = Bottom / 32 - 1; j >= Bottom / 32 - 1 - Height / 32; j--)
+                {
+                    if (bottom > bordas[1] && bordas[1] != 0 || blocos[i, j + 1] == null)
+                        break;
+                    bordas[1] += bottom;
+                    bottom = 32;
+                }
+            }
+        }
+
+        return bordas;
+    }
+
+    private int[] calculateHorizontalCollision(Bloco[,] blocos, Entidades entidades)
+    {
+        int[] bordas = new int[2];
+
+        for (int i = Top / 32; i <= Bottom / 32; i++)
+        {
+            if (blocos[Right / 32, i] != null)
+            {
+                int right = Right % 32 + 1;
+                for (int j = Right / 32 - 1; j >= Right / 32 - 1 - Width / 32; j--)
+                {
+                    if (right > bordas[0] && bordas[0] != 0 || blocos[j + 1, i] == null)
+                        break;
+                    bordas[0] += right;
+                    right = 32;
+                }
+            }
+
+            if (blocos[Left / 32, i] != null)
+            {
+                int left = 32 - Left % 32;
+                for (int j = Left / 32 + 1; j <= Left / 32 + 1 + Width / 32; j++)
+                {
+                    if (left > bordas[1] && bordas[1] != 0 || blocos[j - 1, i] == null)
+                        break;
+                    bordas[1] += left;
+                    left = 32;
+                }
+            }
+        }
+
+        return bordas;
+    }
+
+    private void sortBordas(int[] bordas, string[] bordasNome)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                if (bordas[i] > bordas[j])
+                {
+                    int temp = bordas[j];
+                    bordas[j] = bordas[i];
+                    bordas[i] = temp;
+                    string tempNome = bordasNome[j];
+                    bordasNome[j] = bordasNome[i];
+                    bordasNome[i] = tempNome;
+                }
+            }
+        }
+    }
+
     private void calculateCollision(Bloco[,] blocos, Entidades entidades)
     {
         int salaWidth = blocos.GetLength(0) * 32;
@@ -175,37 +262,163 @@ public class Posicao
         if (Bottom > salaHeight)
             Bottom = salaHeight;
 
-        int top = Top / 32;
-        int topN = 32 - Top % 32;
-        while (++top < blocos.GetLength(1) && topN < Height)
-        {
-            if (blocos[Left / 32, top] == null)
-                break;
+        /*string[] bordasNome = { "top", "right", "bottom", "left"};
+        int[] bordas = new int[4];
+        bool flag = false;*/
 
-            topN += 32;
-        }
-
-
-
+        /*
         // Calculate Top, Bottom
-        for (int i = Left / 32 + 1; i <= Right / 32 - 1; i++)
+        for (int i = Left / 32; i <= Right / 32; i++)
         {
             if (blocos[i, Top / 32] != null)
-                Top = (Top / 32 + 1) * 32;
+            {
+                int top = 32 - Top % 32;
+                for (int j = Top / 32 + 1; j <= Top / 32 + 1 + Height / 32; j++)
+                {
+                    if (top > bordas[0] && bordas[0] != 0 || blocos[i, j-1] == null)
+                        break;
+                    bordas[0] += top;
+                    top = 32;
+                }
+            }
 
             if (blocos[i, Bottom / 32] != null)
+            {
+                int bottom = Bottom % 32 + 1;
+                for (int j = Bottom / 32 - 1; j >= Bottom / 32 - 1 - Height / 32; j--)
+                {
+                    if (bottom > bordas[2] && bordas[2] != 0 || blocos[i, j+1] == null)
+                        break;
+                    bordas[2] += bottom;
+                    bottom = 32;
+                }
+            }
+        }
+
+        // Calculate Right, Left
+        for (int i = Top / 32; i <= Bottom / 32; i++)
+        {
+            if (blocos[Right / 32, i] != null)
+            {
+                int right = Right % 32 + 1;
+                for (int j = Right / 32 - 1; j >= Right / 32 - 1 - Width / 32; j--)
+                {
+                    if (right > bordas[1] && bordas[1] != 0 || blocos[j + 1, i] == null)
+                        break;
+                    bordas[1] += right;
+                    right = 32;
+                }
+            }
+
+            if (blocos[Left / 32, i] != null)
+            {
+                int left = 32 - Left % 32;
+                for (int j = Left / 32 + 1; j <= Left / 32 + 1 + Width / 32; j++)
+                {
+                    if (left > bordas[3] && bordas[3] != 0 || blocos[j - 1, i] == null)
+                        break;
+                    bordas[3] += left;
+                    left = 32;
+                }
+            }
+        }
+        */
+
+        /*for (int i = 0; i < 3; i++)
+        {
+            if (bordas[0] > bordas[1])
+            {
+                int temp = bordas[1];
+                bordas[1] = bordas[0];
+                bordas[0] = temp;
+                string tempNome = bordasNome[1];
+                bordasNome[1] = bordasNome[0];
+                bordasNome[0] = tempNome;
+            }
+        }*/
+
+        int[] vertical = calculateVerticalCollision(blocos, entidades);
+        int[] horizontal = calculateHorizontalCollision(blocos, entidades);
+        string[] bordasNome = { "top", "right", "bottom", "left" };
+        int[] bordas = { vertical[0], horizontal[0], vertical[1], horizontal[1] };
+        sortBordas(bordas, bordasNome);
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (bordas[i] == 0)
+                continue;
+
+            switch (bordasNome[i])
+            {
+                case "top":
+                    Top = (Top / 32 + 1) * 32;
+                    SpeedY = 0;
+                    vertical = calculateVerticalCollision(blocos, entidades);
+                    horizontal = calculateHorizontalCollision(blocos, entidades);
+                    bordasNome = new string[4] { "top", "right", "bottom", "left" };
+                    bordas = new int[4] { vertical[0], horizontal[0], vertical[1], horizontal[1] };
+                    sortBordas(bordas, bordasNome);
+                    break;
+
+                case "right":
+                    Right = Right / 32 * 32 - 1;
+                    SpeedX = 0;
+                    vertical = calculateVerticalCollision(blocos, entidades);
+                    horizontal = calculateHorizontalCollision(blocos, entidades);
+                    bordasNome = new string[4] { "top", "right", "bottom", "left" };
+                    bordas = new int[4] { vertical[0], horizontal[0], vertical[1], horizontal[1] };
+                    sortBordas(bordas, bordasNome);
+                    break;
+
+                case "bottom":
+                    Bottom = Bottom / 32 * 32 - 1;
+                    SpeedY = 0;
+                    vertical = calculateVerticalCollision(blocos, entidades);
+                    horizontal = calculateHorizontalCollision(blocos, entidades);
+                    bordasNome = new string[4] { "top", "right", "bottom", "left" };
+                    bordas = new int[4] { vertical[0], horizontal[0], vertical[1], horizontal[1] };
+                    sortBordas(bordas, bordasNome);
+                    break;
+
+                case "left":
+                    Left = (Left / 32 + 1) * 32;
+                    SpeedX = 0;
+                    vertical = calculateVerticalCollision(blocos, entidades);
+                    horizontal = calculateHorizontalCollision(blocos, entidades);
+                    bordasNome = new string[4] { "top", "right", "bottom", "left" };
+                    bordas = new int[4] { vertical[0], horizontal[0], vertical[1], horizontal[1] };
+                    sortBordas(bordas, bordasNome);
+                    break;
+            }
+        }
+
+        // Calculate Top, Bottom
+        /*for (int i = Left / 32; i <= Right / 32; i++)
+        {
+            if (blocos[i, Top / 32] != null)
+            {
+                Top = (Top / 32 + 1) * 32;
+            }
+
+            if (blocos[i, Bottom / 32] != null)
+            {
                 Bottom = Bottom / 32 * 32 - 1;
+            }
         }
 
         // Calculate Right, Left
         for (int i = Top / 32 + 1; i <= Bottom / 32 - 1; i++)
         {
             if (blocos[Right / 32, i] != null)
+            {
                 Right = Right / 32 * 32 - 1;
+            }
 
             if (blocos[Left / 32, i] != null)
+            {
                 Left = (Left / 32 + 1) * 32;
-        }
+            }
+        }*/
     }
 
     // Calcula o movimento da entidade
