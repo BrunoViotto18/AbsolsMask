@@ -168,26 +168,46 @@ public class Posicao
         {
             if (blocos[i, Top / 32] != null)
             {
-                int top = 32 - Top % 32;
-                for (int j = Top / 32 + 1; j <= Top / 32 + 1 + Height / 32; j++)
+                int distanceTop = 0;
+                int t = Top / 32;
+                while (blocos[t, i] != null)
                 {
-                    if (top > bordas[0] && bordas[0] != 0 || blocos[i, j - 1] == null)
+                    if (t == Top / 32)
+                        distanceTop = 32 - Top % 32;
+                    else
+                        distanceTop += 32;
+
+                    if (distanceTop > bordas[0] && bordas[0] != 0)
+                    {
+                        distanceTop = bordas[0];
                         break;
-                    bordas[0] += top;
-                    top = 32;
+                    }
+
+                    t++;
                 }
+                bordas[0] = distanceTop;
             }
 
             if (blocos[i, Bottom / 32] != null)
             {
-                int bottom = Bottom % 32 + 1;
-                for (int j = Bottom / 32 - 1; j >= Bottom / 32 - 1 - Height / 32; j--)
+                int distanceBottom = 0;
+                int l = Bottom / 32;
+                while (blocos[l, i] != null)
                 {
-                    if (bottom > bordas[1] && bordas[1] != 0 || blocos[i, j + 1] == null)
+                    if (l == Bottom / 32)
+                        distanceBottom = Bottom % 32 + 1;
+                    else
+                        distanceBottom += 32;
+
+                    if (distanceBottom > bordas[1] && bordas[1] != 0)
+                    {
+                        distanceBottom = bordas[1];
                         break;
-                    bordas[1] += bottom;
-                    bottom = 32;
+                    }
+
+                    l--;
                 }
+                bordas[1] = distanceBottom;
             }
         }
 
@@ -202,26 +222,46 @@ public class Posicao
         {
             if (blocos[Right / 32, i] != null)
             {
-                int right = Right % 32 + 1;
-                for (int j = Right / 32 - 1; j >= Right / 32 - 1 - Width / 32; j--)
+                int distanceRight = 0;
+                int r = Right / 32;
+                while (r > 0 && r < blocos.GetLength(0) && blocos[r, i] != null)
                 {
-                    if (right > bordas[0] && bordas[0] != 0 || blocos[j + 1, i] == null)
+                    if (r == Right / 32)
+                        distanceRight = Right % 32 + 1;
+                    else
+                        distanceRight += 32;
+
+                    if (distanceRight > bordas[0] && bordas[0] != 0)
+                    {
+                        distanceRight = bordas[0];
                         break;
-                    bordas[0] += right;
-                    right = 32;
+                    }
+
+                    r--;
                 }
+                bordas[0] = distanceRight;
             }
 
             if (blocos[Left / 32, i] != null)
             {
-                int left = 32 - Left % 32;
-                for (int j = Left / 32 + 1; j <= Left / 32 + 1 + Width / 32; j++)
+                int distanceLeft = 0;
+                int l = Left / 32;
+                while (blocos[l, i] != null)
                 {
-                    if (left > bordas[1] && bordas[1] != 0 || blocos[j - 1, i] == null)
+                    if (l == Left / 32)
+                        distanceLeft = 32 - Left % 32;
+                    else
+                        distanceLeft += 32;
+
+                    if (distanceLeft > bordas[1] && bordas[1] != 0)
+                    {
+                        distanceLeft = bordas[1];
                         break;
-                    bordas[1] += left;
-                    left = 32;
+                    }
+
+                    l++;
                 }
+                bordas[1] = distanceLeft;
             }
         }
 
@@ -230,11 +270,11 @@ public class Posicao
 
     private void sortBordas(int[] bordas, string[] bordasNome)
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             for (int j = 0; j < 4; j++)
             {
-                if (bordas[i] > bordas[j])
+                if (bordas[i] < bordas[j])
                 {
                     int temp = bordas[j];
                     bordas[j] = bordas[i];
@@ -262,81 +302,7 @@ public class Posicao
         if (Bottom > salaHeight)
             Bottom = salaHeight;
 
-        /*string[] bordasNome = { "top", "right", "bottom", "left"};
-        int[] bordas = new int[4];
-        bool flag = false;*/
-
-        /*
-        // Calculate Top, Bottom
-        for (int i = Left / 32; i <= Right / 32; i++)
-        {
-            if (blocos[i, Top / 32] != null)
-            {
-                int top = 32 - Top % 32;
-                for (int j = Top / 32 + 1; j <= Top / 32 + 1 + Height / 32; j++)
-                {
-                    if (top > bordas[0] && bordas[0] != 0 || blocos[i, j-1] == null)
-                        break;
-                    bordas[0] += top;
-                    top = 32;
-                }
-            }
-
-            if (blocos[i, Bottom / 32] != null)
-            {
-                int bottom = Bottom % 32 + 1;
-                for (int j = Bottom / 32 - 1; j >= Bottom / 32 - 1 - Height / 32; j--)
-                {
-                    if (bottom > bordas[2] && bordas[2] != 0 || blocos[i, j+1] == null)
-                        break;
-                    bordas[2] += bottom;
-                    bottom = 32;
-                }
-            }
-        }
-
-        // Calculate Right, Left
-        for (int i = Top / 32; i <= Bottom / 32; i++)
-        {
-            if (blocos[Right / 32, i] != null)
-            {
-                int right = Right % 32 + 1;
-                for (int j = Right / 32 - 1; j >= Right / 32 - 1 - Width / 32; j--)
-                {
-                    if (right > bordas[1] && bordas[1] != 0 || blocos[j + 1, i] == null)
-                        break;
-                    bordas[1] += right;
-                    right = 32;
-                }
-            }
-
-            if (blocos[Left / 32, i] != null)
-            {
-                int left = 32 - Left % 32;
-                for (int j = Left / 32 + 1; j <= Left / 32 + 1 + Width / 32; j++)
-                {
-                    if (left > bordas[3] && bordas[3] != 0 || blocos[j - 1, i] == null)
-                        break;
-                    bordas[3] += left;
-                    left = 32;
-                }
-            }
-        }
-        */
-
-        /*for (int i = 0; i < 3; i++)
-        {
-            if (bordas[0] > bordas[1])
-            {
-                int temp = bordas[1];
-                bordas[1] = bordas[0];
-                bordas[0] = temp;
-                string tempNome = bordasNome[1];
-                bordasNome[1] = bordasNome[0];
-                bordasNome[0] = tempNome;
-            }
-        }*/
-
+        
         int[] vertical = calculateVerticalCollision(blocos, entidades);
         int[] horizontal = calculateHorizontalCollision(blocos, entidades);
         string[] bordasNome = { "top", "right", "bottom", "left" };
@@ -353,72 +319,49 @@ public class Posicao
                 case "top":
                     Top = (Top / 32 + 1) * 32;
                     SpeedY = 0;
-                    vertical = calculateVerticalCollision(blocos, entidades);
-                    horizontal = calculateHorizontalCollision(blocos, entidades);
-                    bordasNome = new string[4] { "top", "right", "bottom", "left" };
-                    bordas = new int[4] { vertical[0], horizontal[0], vertical[1], horizontal[1] };
-                    sortBordas(bordas, bordasNome);
                     break;
 
                 case "right":
-                    Right = Right / 32 * 32 - 1;
+                    Right = Right / 32 - 1;
                     SpeedX = 0;
-                    vertical = calculateVerticalCollision(blocos, entidades);
-                    horizontal = calculateHorizontalCollision(blocos, entidades);
-                    bordasNome = new string[4] { "top", "right", "bottom", "left" };
-                    bordas = new int[4] { vertical[0], horizontal[0], vertical[1], horizontal[1] };
-                    sortBordas(bordas, bordasNome);
                     break;
 
                 case "bottom":
-                    Bottom = Bottom / 32 * 32 - 1;
+                    Bottom = Bottom / 32 - 1;
                     SpeedY = 0;
-                    vertical = calculateVerticalCollision(blocos, entidades);
-                    horizontal = calculateHorizontalCollision(blocos, entidades);
-                    bordasNome = new string[4] { "top", "right", "bottom", "left" };
-                    bordas = new int[4] { vertical[0], horizontal[0], vertical[1], horizontal[1] };
-                    sortBordas(bordas, bordasNome);
                     break;
 
                 case "left":
                     Left = (Left / 32 + 1) * 32;
                     SpeedX = 0;
-                    vertical = calculateVerticalCollision(blocos, entidades);
-                    horizontal = calculateHorizontalCollision(blocos, entidades);
-                    bordasNome = new string[4] { "top", "right", "bottom", "left" };
-                    bordas = new int[4] { vertical[0], horizontal[0], vertical[1], horizontal[1] };
-                    sortBordas(bordas, bordasNome);
                     break;
             }
+
+            vertical = calculateVerticalCollision(blocos, entidades);
+            horizontal = calculateHorizontalCollision(blocos, entidades);
+
+            for (int j = 0; j < 4; j++)
+            {
+                switch (bordasNome[j])
+                {
+                    case "top":
+                        bordas[j] = vertical[0];
+                        break;
+
+                    case "right":
+                        bordas[j] = horizontal[0];
+                        break;
+
+                    case "bottom":
+                        bordas[j] = vertical[1];
+                        break;
+
+                    case "left":
+                        bordas[j] = horizontal[1];
+                        break;
+                }
+            }
         }
-
-        // Calculate Top, Bottom
-        /*for (int i = Left / 32; i <= Right / 32; i++)
-        {
-            if (blocos[i, Top / 32] != null)
-            {
-                Top = (Top / 32 + 1) * 32;
-            }
-
-            if (blocos[i, Bottom / 32] != null)
-            {
-                Bottom = Bottom / 32 * 32 - 1;
-            }
-        }
-
-        // Calculate Right, Left
-        for (int i = Top / 32 + 1; i <= Bottom / 32 - 1; i++)
-        {
-            if (blocos[Right / 32, i] != null)
-            {
-                Right = Right / 32 * 32 - 1;
-            }
-
-            if (blocos[Left / 32, i] != null)
-            {
-                Left = (Left / 32 + 1) * 32;
-            }
-        }*/
     }
 
     // Calcula o movimento da entidade
