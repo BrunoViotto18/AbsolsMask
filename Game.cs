@@ -131,7 +131,7 @@ public class Game : Form
         rng = new Random(this.seed);
         this.tm = new System.Windows.Forms.Timer();
         this.tm.Interval = 16;
-        this.tm.Interval = 200;
+        //this.tm.Interval = 200;
 
 
         // Criação de objetos

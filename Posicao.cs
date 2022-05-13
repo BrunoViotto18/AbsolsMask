@@ -103,7 +103,7 @@ public class Posicao
 
 
     // Construtor
-    public Posicao(int X, int Y, int maxSpeedX=6, int maxSpeedY=6, int dx=5, int dy=5, int speedX=0, int speedY=0, int gravidadeY=5, int gravidadeX=0)
+    public Posicao(int X, int Y, int maxSpeedX=10, int maxSpeedY=10, int dx=5, int dy=5, int speedX=0, int speedY=0, int gravidadeY=5, int gravidadeX=0)
     {
         this.x = X;
         this.y = Y;
@@ -170,7 +170,7 @@ public class Posicao
             {
                 int distanceTop = 0;
                 int t = Top / 32;
-                while (blocos[t, i] != null)
+                while (blocos[i, t] != null)
                 {
                     if (t == Top / 32)
                         distanceTop = 32 - Top % 32;
@@ -184,6 +184,8 @@ public class Posicao
                     }
 
                     t++;
+                    if (t == blocos.GetLength(1))
+                        break;
                 }
                 bordas[0] = distanceTop;
             }
@@ -191,10 +193,10 @@ public class Posicao
             if (blocos[i, Bottom / 32] != null)
             {
                 int distanceBottom = 0;
-                int l = Bottom / 32;
-                while (blocos[l, i] != null)
+                int b = Bottom / 32;
+                while (blocos[i, b] != null)
                 {
-                    if (l == Bottom / 32)
+                    if (b == Bottom / 32)
                         distanceBottom = Bottom % 32 + 1;
                     else
                         distanceBottom += 32;
@@ -205,7 +207,9 @@ public class Posicao
                         break;
                     }
 
-                    l--;
+                    b--;
+                    if (b < 0)
+                        break;
                 }
                 bordas[1] = distanceBottom;
             }
@@ -238,6 +242,8 @@ public class Posicao
                     }
 
                     r--;
+                    if (r < 0)
+                        break;
                 }
                 bordas[0] = distanceRight;
             }
@@ -260,6 +266,8 @@ public class Posicao
                     }
 
                     l++;
+                    if (l == blocos.GetLength(0))
+                        break;
                 }
                 bordas[1] = distanceLeft;
             }
@@ -317,22 +325,22 @@ public class Posicao
             switch (bordasNome[i])
             {
                 case "top":
-                    Top = (Top / 32 + 1) * 32;
+                    Top = Top + bordas[i];
                     SpeedY = 0;
                     break;
 
                 case "right":
-                    Right = Right / 32 - 1;
+                    Right = Right - bordas[i];
                     SpeedX = 0;
                     break;
 
                 case "bottom":
-                    Bottom = Bottom / 32 - 1;
+                    Bottom = Bottom - bordas[i];
                     SpeedY = 0;
                     break;
 
                 case "left":
-                    Left = (Left / 32 + 1) * 32;
+                    Left = Left + bordas[i];
                     SpeedX = 0;
                     break;
             }
