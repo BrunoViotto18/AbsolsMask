@@ -56,5 +56,4 @@ public abstract class Entidade
     }
 
     public abstract void RenderSelf(Graphics g);
-    //private abstract void CalculateCollision(List<Bloco> blocos, List<Entidade> entidades);
 }

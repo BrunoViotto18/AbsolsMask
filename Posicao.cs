@@ -103,7 +103,7 @@ public class Posicao
 
 
     // Construtor
-    public Posicao(int X, int Y, int maxSpeedX=10, int maxSpeedY=10, int dx=5, int dy=5, int speedX=0, int speedY=0, int gravidadeY=5, int gravidadeX=0)
+    public Posicao(int X, int Y, int maxSpeedX=10, int maxSpeedY=10, int dx=5, int dy=5, int speedX=0, int speedY=0, int gravidadeY=2, int gravidadeX=0)
     {
         this.x = X;
         this.y = Y;
@@ -143,7 +143,6 @@ public class Posicao
                     break;
             }
         }
-        KeyPressManager.Clear();
     }
 
     // Calcula a gravidade

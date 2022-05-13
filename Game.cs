@@ -151,6 +151,11 @@ public class Game : Form
             KeyPressManager.AddKey(e.KeyCode);
         };
 
+        this.KeyUp += (s, e) =>
+        {
+            KeyPressManager.RemoveKey(e.KeyCode);
+        };
+
         // Delegação do tick
         this.tm.Tick += delegate
         {

@@ -20,6 +20,13 @@ public static class KeyPressManager
             keysPressed.Add(key);
     }
 
+    public static void RemoveKey(Keys key)
+    {
+        keysPressed.Remove(key);
+    }
+
     public static void Clear()
-        => keysPressed.Clear();
+    {
+        keysPressed.Clear();
+    }
 }
