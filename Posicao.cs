@@ -159,9 +159,9 @@ public class Posicao
         tick = 0;
     }
 
-    private int[] calculateVerticalCollision(Bloco[,] blocos, Entidades entidades)
+    private int calculateTopCollision(Bloco[,] blocos, Entidades entidades)
     {
-        int[] bordas = new int[2];
+        int top = 0;
 
         for (int i = Left / 32; i <= Right / 32; i++)
         {
@@ -176,9 +176,9 @@ public class Posicao
                     else
                         distanceTop += 32;
 
-                    if (distanceTop > bordas[0] && bordas[0] != 0)
+                    if (distanceTop > top && top != 0)
                     {
-                        distanceTop = bordas[0];
+                        distanceTop = top;
                         break;
                     }
 
@@ -186,9 +186,19 @@ public class Posicao
                     if (t == blocos.GetLength(1))
                         break;
                 }
-                bordas[0] = distanceTop;
+                top = distanceTop;
             }
+        }
 
+        return top;
+    }
+
+    private int calculateBottomCollision(Bloco[,] blocos, Entidades entidades)
+    {
+        int bottom = 0;
+
+        for (int i = Left / 32; i <= Right / 32; i++)
+        {
             if (blocos[i, Bottom / 32] != null)
             {
                 int distanceBottom = 0;
@@ -200,9 +210,9 @@ public class Posicao
                     else
                         distanceBottom += 32;
 
-                    if (distanceBottom > bordas[1] && bordas[1] != 0)
+                    if (distanceBottom > bottom && bottom != 0)
                     {
-                        distanceBottom = bordas[1];
+                        distanceBottom = bottom;
                         break;
                     }
 
@@ -210,11 +220,79 @@ public class Posicao
                     if (b < 0)
                         break;
                 }
-                bordas[1] = distanceBottom;
+                bottom = distanceBottom;
             }
         }
 
-        return bordas;
+        return bottom;
+    }
+
+    private int calculateLeftCollision(Bloco[,] blocos, Entidades entidades)
+    {
+        int left = 0;
+
+        for (int i = Top / 32; i <= Bottom / 32; i++)
+        {
+            if (blocos[Left / 32, i] != null)
+            {
+                int distanceLeft = 0;
+                int l = Left / 32;
+                while (blocos[l, i] != null)
+                {
+                    if (l == Left / 32)
+                        distanceLeft = 32 - Left % 32;
+                    else
+                        distanceLeft += 32;
+
+                    if (distanceLeft > left && left != 0)
+                    {
+                        distanceLeft = left;
+                        break;
+                    }
+
+                    l++;
+                    if (l == blocos.GetLength(0))
+                        break;
+                }
+                left = distanceLeft;
+            }
+        }
+
+        return left;
+    }
+
+    private int calculateRightCollision(Bloco[,] blocos, Entidades entidades)
+    {
+        int right = 0;
+
+        for (int i = Top / 32; i <= Bottom / 32; i++)
+        {
+            if (blocos[Right / 32, i] != null)
+            {
+                int distanceRight = 0;
+                int r = Right / 32;
+                while (r > 0 && r < blocos.GetLength(0) && blocos[r, i] != null)
+                {
+                    if (r == Right / 32)
+                        distanceRight = Right % 32 + 1;
+                    else
+                        distanceRight += 32;
+
+                    if (distanceRight > right && right != 0)
+                    {
+                        distanceRight = right;
+                        break;
+                    }
+
+                    r--;
+                    if (r < 0)
+                        break;
+                }
+                right = distanceRight;
+            }
+        }
+
+        return right;
     }
 
     private int[] calculateHorizontalCollision(Bloco[,] blocos, Entidades entidades)
@@ -309,11 +387,13 @@ public class Posicao
         if (Bottom > salaHeight)
             Bottom = salaHeight;
 
-        
-        int[] vertical = calculateVerticalCollision(blocos, entidades);
-        int[] horizontal = calculateHorizontalCollision(blocos, entidades);
+        int top = calculateTopCollision(blocos, entidades);
+        int bottom = calculateBottomCollision(blocos, entidades);
+        int left = calculateLeftCollision(blocos, entidades);
+        int right = calculateRightCollision(blocos, entidades);
+
         string[] bordasNome = { "top", "right", "bottom", "left" };
-        int[] bordas = { vertical[0], horizontal[0], vertical[1], horizontal[1] };
+        int[] bordas = { top, right, bottom, left };
         sortBordas(bordas, bordasNome);
 
         for (int i = 0; i < 4; i++)
@@ -344,27 +424,29 @@ public class Posicao
                     break;
             }
 
-            vertical = calculateVerticalCollision(blocos, entidades);
-            horizontal = calculateHorizontalCollision(blocos, entidades);
+            top = calculateTopCollision(blocos, entidades);
+            bottom = calculateBottomCollision(blocos, entidades);
+            right = calculateRightCollision(blocos, entidades);
+            left = calculateLeftCollision(blocos, entidades);
 
             for (int j = 0; j < 4; j++)
             {
                 switch (bordasNome[j])
                 {
                     case "top":
-                        bordas[j] = vertical[0];
+                        bordas[j] = top;
                         break;
 
                     case "right":
-                        bordas[j] = horizontal[0];
+                        bordas[j] = right;
                         break;
 
                     case "bottom":
-                        bordas[j] = vertical[1];
+                        bordas[j] = bottom;
                         break;
 
                     case "left":
-                        bordas[j] = horizontal[1];
+                        bordas[j] = left;
                         break;
                 }
             }

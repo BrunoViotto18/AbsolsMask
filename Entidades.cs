@@ -1,6 +1,6 @@
 ﻿namespace AbsolsMask;
 
-public class Entidades
+public struct Entidades
 {
     private Entidade player;
     private List<Entidade> inimigos;

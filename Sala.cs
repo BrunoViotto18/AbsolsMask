@@ -103,6 +103,6 @@ public class Sala
     // Renderiza as entidades
     private void RenderEntities(Graphics g)
     {
-        this.entidades.Player.RenderSelf(g);
+        this.entidades.Player.RenderAction(g);
     }
 }

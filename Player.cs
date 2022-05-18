@@ -10,11 +10,6 @@ public class Player : Entidade
 
     }
 
-    public override void RenderSelf(Graphics g)
-    {
-        g.FillRectangle(Brushes.DarkRed, new Rectangle(this.Left, this.Top, this.Width, this.Height));
-    }
-
     private void RenderBody()
     {
 

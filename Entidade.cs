@@ -4,42 +4,42 @@ public abstract class Entidade
 {
     protected int maxHP;
     protected int hp;
-    protected Posicao position;
+    protected ActionManager actionManager;
 
     // GET & SET
     public int X
     {
-        get => this.position.X;
+        get => this.actionManager.X;
     }
     public int Y
     {
-        get => this.position.Y;
+        get => this.actionManager.Y;
     }
 
     public int Height
     {
-        get => this.position.Height;
+        get => this.actionManager.Height;
     }
     public int Width
     {
-        get => this.position.Width;
+        get => this.actionManager.Width;
     }
 
     public int Top
     {
-        get => position.Top;
+        get => actionManager.Top;
     }
     public int Right
     {
-        get => position.Right;
+        get => actionManager.Right;
     }
     public int Bottom
     {
-        get => position.Bottom;
+        get => actionManager.Bottom;
     }
     public int Left
     {
-        get => position.Left;
+        get => actionManager.Left;
     }
 
     // Construtor
@@ -47,13 +47,18 @@ public abstract class Entidade
     {
         this.hp = hp;
         this.maxHP = maxHp;
-        this.position = new Posicao(X, Y);
+        this.actionManager = new ActionManager(X, Y);
     }
 
     public void CalculateSelfMoviment(Bloco[,] blocos, Entidades entidades)
     {
-        this.position.CalculateMoviment(blocos, entidades);
+        this.actionManager.CalculateAction();
+        this.actionManager.RunCurrentAction();
+        this.actionManager.CalculateActionMoviment(blocos, entidades);
     }
 
-    public abstract void RenderSelf(Graphics g);
+    public void RenderAction(Graphics g)
+    {
+        this.actionManager.RenderCurrentAction(g);
+    }
 }
