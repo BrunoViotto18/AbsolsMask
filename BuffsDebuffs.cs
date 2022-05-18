@@ -1,6 +1,6 @@
 namespace AbsolsMask;
 
-public class BuffsDebuffs{
+public struct BuffsDebuffs{
     private int invencivel;
     private bool dash;
     private bool puloDuplo;

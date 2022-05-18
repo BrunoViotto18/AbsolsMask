@@ -10,6 +10,13 @@ public class ActionManager
     private BuffsDebuffs buffDebuff;
     private List<Action> actions = new List<Action>();
 
+    public ActionManager(Posicao posicao, Direction direcao, BuffsDebuffs buffDebuff, List<Action> actions){
+        this.posicao = posicao;
+        this.direcao = direcao;
+        this.buffDebuff = buffDebuff;
+        this.actions = actions;
+    }
+
     //Gets de posicao
     public int X
     {

@@ -6,7 +6,7 @@ namespace AbsolsMask
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new Game(12345));
+            Application.Run(new TelaLogin());
         }
     }
 }
