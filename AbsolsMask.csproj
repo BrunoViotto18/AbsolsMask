@@ -18,6 +18,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="Properties\TelaLogin.Designer.cs">
+      <DependentUpon>TelaLogin.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Properties\Salas.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -28,6 +33,10 @@
   <ItemGroup>
     <EmbeddedResource Update="Properties\Blocos.resx">
       <LastGenOutput>Blocos.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\TelaLogin.resx">
+      <LastGenOutput>TelaLogin.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\Salas.resx">
