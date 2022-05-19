@@ -61,8 +61,31 @@ public class ActionManager
     // Calcula a ação atual da entidade
     public void CalculateAction()
     {
-        if (currentAction.GetType().GetCustomAttribute<IdleAttribute>() == null)
-            currentAction = new Idle(Properties.Entidades.Player.Idle, 3, new int[] { 20, 20, 20 });
+        /* Calcular direcao */
+        if (currentAction.ChangeDirection)
+        {
+            foreach (var key in KeyPressManager.KeysPressed)
+            {
+                switch (key)
+                {
+                    case Keys.Left:
+                        this.direcao = Direction.Left;
+                        break;
+
+                    case Keys.Right:
+                        this.direcao = Direction.Right;
+                        break;
+
+                    default:
+                        continue;
+                }
+                break;
+            }
+        }
+
+
+        if (currentAction.GetType()/*.GetCustomAttribute<IdleAttribute>()*/ == null)
+            currentAction = new Idle(Properties.Entidades.Player.Idle, 3, new int[] { 20, 1, 1 });
     }
 
     // Calcula a velocidade da ação

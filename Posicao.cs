@@ -295,64 +295,6 @@ public class Posicao
         return right;
     }
 
-    private int[] calculateHorizontalCollision(Bloco[,] blocos, Entidades entidades)
-    {
-        int[] bordas = new int[2];
-
-        for (int i = Top / 32; i <= Bottom / 32; i++)
-        {
-            if (blocos[Right / 32, i] != null)
-            {
-                int distanceRight = 0;
-                int r = Right / 32;
-                while (r > 0 && r < blocos.GetLength(0) && blocos[r, i] != null)
-                {
-                    if (r == Right / 32)
-                        distanceRight = Right % 32 + 1;
-                    else
-                        distanceRight += 32;
-
-                    if (distanceRight > bordas[0] && bordas[0] != 0)
-                    {
-                        distanceRight = bordas[0];
-                        break;
-                    }
-
-                    r--;
-                    if (r < 0)
-                        break;
-                }
-                bordas[0] = distanceRight;
-            }
-
-            if (blocos[Left / 32, i] != null)
-            {
-                int distanceLeft = 0;
-                int l = Left / 32;
-                while (blocos[l, i] != null)
-                {
-                    if (l == Left / 32)
-                        distanceLeft = 32 - Left % 32;
-                    else
-                        distanceLeft += 32;
-
-                    if (distanceLeft > bordas[1] && bordas[1] != 0)
-                    {
-                        distanceLeft = bordas[1];
-                        break;
-                    }
-
-                    l++;
-                    if (l == blocos.GetLength(0))
-                        break;
-                }
-                bordas[1] = distanceLeft;
-            }
-        }
-
-        return bordas;
-    }
-
     private void sortBordas(int[] bordas, string[] bordasNome)
     {
         for (int i = 0; i < 4; i++)

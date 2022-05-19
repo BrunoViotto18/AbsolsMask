@@ -130,7 +130,7 @@ public class Game : Form
         // Random e Timer
         rng = new Random(this.seed);
         this.tm = new System.Windows.Forms.Timer();
-        this.tm.Interval = 16;
+        this.tm.Interval = 1000 / 60 ;
         //this.tm.Interval = 200;
 
 
