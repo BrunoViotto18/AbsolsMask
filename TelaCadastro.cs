@@ -16,5 +16,22 @@ namespace AbsolsMask
         {
             InitializeComponent();
         }
+
+        private void btConfirmCadastro_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Cadastro Realizado com sucesso");
+            TelaLogin novo = new TelaLogin();
+            this.Hide();
+            novo.ShowDialog();
+            this.Close();
+        }
+
+        private void btCancelar_Click(object sender, EventArgs e)
+        {
+            TelaLogin novo = new TelaLogin();
+            this.Hide();
+            novo.ShowDialog();
+            this.Close();
+        }
     }
 }
