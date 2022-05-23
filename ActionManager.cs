@@ -4,7 +4,7 @@ using System.Reflection;
 
 public class ActionManager
 {
-    private Action currentAction = new Idle(Properties.Entidades.Player.Idle, 3, new int[] { 20, 20, 20 });
+    private Action currentAction = new Idle(Properties.Entidades.Player.Idle, new int[] { 8, 8, 8 });
     private Posicao posicao;
     private Direction direcao;
     private BuffsDebuffs buffDebuff;
@@ -62,30 +62,39 @@ public class ActionManager
     public void CalculateAction()
     {
         /* Calcular direcao */
+
+        bool key = false;
         if (currentAction.ChangeDirection)
         {
-            foreach (var key in KeyPressManager.KeysPressed)
+            key = true;
+            var keyDirection = KeyPressManager.KeysPressed.LastOrDefault(k => k == Keys.Left || k == Keys.Right);
+
+            switch (keyDirection)
             {
-                switch (key)
-                {
-                    case Keys.Left:
-                        this.direcao = Direction.Left;
-                        break;
+                case Keys.Left:
+                    this.direcao = Direction.Left;
+                    break;
 
-                    case Keys.Right:
-                        this.direcao = Direction.Right;
-                        break;
+                case Keys.Right:
+                    this.direcao = Direction.Right;
+                    break;
 
-                    default:
-                        continue;
-                }
-                break;
+                default:
+                    key = false;
+                    break;
             }
         }
 
 
-        if (currentAction.GetType()/*.GetCustomAttribute<IdleAttribute>()*/ == null)
-            currentAction = new Idle(Properties.Entidades.Player.Idle, 3, new int[] { 20, 1, 1 });
+        /* Calcular ação */
+        
+        if (posicao.BottomDistance == 0)
+        {
+            if (key && currentAction.GetType().GetCustomAttribute<WalkAttribute>() == null)
+                currentAction = new Walk(Properties.Entidades.Player.Walk, new int[] { 5, 5, 5, 5, 5, 5, 5 });
+            else if (currentAction.GetType().GetCustomAttribute<IdleAttribute>() == null)
+                currentAction = new Idle(Properties.Entidades.Player.Idle, new int[] { 8, 8, 8 });
+        }
     }
 
     // Calcula a velocidade da ação

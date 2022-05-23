@@ -7,15 +7,19 @@ public class Posicao
     private int y;
     private int maxSpeedX;
     private int maxSpeedY;
-    private int dx;
-    private int dy;
     private int speedX;
     private int speedY;
-    protected int gravidadeX;
-    protected int gravidadeY;
+    private int gravidadeX;
+    private int gravidadeY;
+
+    private int topDistance;
+    private int rightDistance;
+    private int bottomDistance;
+    private int leftDistance;
+
     private List<Keys> keysPressed = new List<Keys>();
+    private static int maxTick = 4;
     private HitBox hitBox;
-    public static int maxTick = 12;
     private int tick = 0;
 
 
@@ -35,7 +39,7 @@ public class Posicao
     public int SpeedX
     {
         get => speedX;
-        private set
+        set
         {
             if (value > maxSpeedX)
             {
@@ -53,7 +57,7 @@ public class Posicao
     public int SpeedY
     {
         get => speedY;
-        private set
+        set
         {
             if (value > maxSpeedY)
             {
@@ -101,16 +105,31 @@ public class Posicao
         private set => X = value;
     }
 
+    public int TopDistance
+    {
+        get => topDistance;
+    }
+    public int RightDistance
+    {
+        get => rightDistance;
+    }
+    public int BottomDistance
+    {
+        get => bottomDistance;
+    }
+    public int LeftDistance
+    {
+        get => leftDistance;
+    }
+
 
     // Construtor
-    public Posicao(int X, int Y, int maxSpeedX=10, int maxSpeedY=10, int dx=5, int dy=5, int speedX=0, int speedY=0, int gravidadeY=2, int gravidadeX=0)
+    public Posicao(int X, int Y, int maxSpeedX=10, int maxSpeedY=5, int speedX=0, int speedY=0, int gravidadeY=2, int gravidadeX=0)
     {
         this.x = X;
         this.y = Y;
         this.maxSpeedX = maxSpeedX;
         this.maxSpeedY = maxSpeedY;
-        this.dx = dx;
-        this.dy = dy;
         this.speedX = speedX;
         this.speedY = speedY;
         this.gravidadeX = gravidadeX;
@@ -127,20 +146,20 @@ public class Posicao
             switch (key)
             {
                 case Keys.Up:
-                    speedY = -dy;
+                    speedY = -5;
                     break;
 
-                case Keys.Right:
-                    speedX = dx;
-                    break;
+                //case Keys.Right:
+                //    speedX = dx;
+                //    break;
 
                 case Keys.Down:
-                    speedY = dy;
+                    speedY = 5;
                     break;
 
-                case Keys.Left:
-                    speedX = -dx;
-                    break;
+                //case Keys.Left:
+                //    speedX = -dx;
+                //    break;
             }
         }
     }
@@ -167,7 +186,7 @@ public class Posicao
         {
             if (blocos[i, Top / 32] != null)
             {
-                int distanceTop = 0;
+                int distanceTop = -1;
                 int t = Top / 32;
                 while (blocos[i, t] != null)
                 {
@@ -190,6 +209,8 @@ public class Posicao
             }
         }
 
+        topDistance = Bottom;
+
         return top;
     }
 
@@ -201,7 +222,7 @@ public class Posicao
         {
             if (blocos[i, Bottom / 32] != null)
             {
-                int distanceBottom = 0;
+                int distanceBottom = -1;
                 int b = Bottom / 32;
                 while (blocos[i, b] != null)
                 {
@@ -224,6 +245,8 @@ public class Posicao
             }
         }
 
+        bottomDistance = bottom;
+
         return bottom;
     }
 
@@ -235,7 +258,7 @@ public class Posicao
         {
             if (blocos[Left / 32, i] != null)
             {
-                int distanceLeft = 0;
+                int distanceLeft = -1;
                 int l = Left / 32;
                 while (blocos[l, i] != null)
                 {
@@ -258,6 +281,8 @@ public class Posicao
             }
         }
 
+        leftDistance = left;
+
         return left;
     }
 
@@ -269,7 +294,7 @@ public class Posicao
         {
             if (blocos[Right / 32, i] != null)
             {
-                int distanceRight = 0;
+                int distanceRight = -1;
                 int r = Right / 32;
                 while (r > 0 && r < blocos.GetLength(0) && blocos[r, i] != null)
                 {
@@ -291,6 +316,8 @@ public class Posicao
                 right = distanceRight;
             }
         }
+
+        rightDistance = right;
 
         return right;
     }
@@ -348,21 +375,25 @@ public class Posicao
                 case "top":
                     Top = Top + bordas[i];
                     SpeedY = 0;
+                    topDistance = 0;
                     break;
 
                 case "right":
                     Right = Right - bordas[i];
                     SpeedX = 0;
+                    rightDistance = 0;
                     break;
 
                 case "bottom":
                     Bottom = Bottom - bordas[i];
                     SpeedY = 0;
+                    bottomDistance = 0;
                     break;
 
                 case "left":
                     Left = Left + bordas[i];
                     SpeedX = 0;
+                    leftDistance = 0;
                     break;
             }
 

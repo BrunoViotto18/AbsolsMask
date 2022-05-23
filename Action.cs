@@ -13,18 +13,20 @@ public class Action
     protected int spriteDelay = 0;
 
 
-    public virtual bool ChangeDirection
+    public bool ChangeDirection
     {
         get => changeDirection;
     }
 
-    public Action(Bitmap spritesheet, int spriteNum, int[] spriteTime)
+
+    public Action(Bitmap spritesheet, int[] spriteTime)
     {
         this.spritesheet = spritesheet;
-        this.spriteNum = spriteNum;
         this.spriteTime = spriteTime;
+        this.spriteNum = spriteTime.Length;
         this.spriteWidth = spritesheet.Width / spriteNum;
     }
+
 
     public virtual void RunAction(Posicao posicao, Direction direction)
     {
