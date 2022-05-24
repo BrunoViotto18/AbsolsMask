@@ -5,7 +5,7 @@ public class Walk : Action
 {
     public Walk(Bitmap spritesheet, int[] spriteTime) : base(spritesheet, spriteTime)
     {
-
+        this.prioridade = 1;
     }
 
     public override void RunAction(Posicao posicao, Direction direction)
@@ -13,13 +13,15 @@ public class Walk : Action
         switch (direction)
         {
             case Direction.Left:
-                posicao.SpeedX = -5;
+                posicao.SpeedX = -4;
                 break;
 
             case Direction.Right:
-                posicao.SpeedX = 5;
+                posicao.SpeedX = 4;
                 break;
         }
-        changeDirection = true;
+        this.changeDirection = true;
+        if (!KeyPressManager.KeysPressed.Contains(Keys.Right) && !KeyPressManager.KeysPressed.Contains(Keys.Left))
+            this.prioridade = -1;
     }
 }
