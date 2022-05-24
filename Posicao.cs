@@ -424,6 +424,7 @@ public class Posicao
                 }
             }
         }
+        speedX = 0;
     }
 
     // Calcula o movimento da entidade

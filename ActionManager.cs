@@ -90,9 +90,11 @@ public class ActionManager
         
         if (posicao.BottomDistance == 0)
         {
-            if (key && currentAction.GetType().GetCustomAttribute<WalkAttribute>() == null)
-                currentAction = new Walk(Properties.Entidades.Player.Walk, new int[] { 5, 5, 5, 5, 5, 5, 5 });
-            else if (currentAction.GetType().GetCustomAttribute<IdleAttribute>() == null)
+            if (key && KeyPressManager.KeysPressed.Contains(Keys.Z) && currentAction.Prioridade < 2)
+                currentAction = new Run(Properties.Entidades.Player.Run, new int[] { 3, 3, 3, 3 });
+            else if (key && currentAction.Prioridade < 1)
+                currentAction = new Walk(Properties.Entidades.Player.Walk, new int[] { 5, 5, 5, 5 });
+            else if (currentAction.Prioridade < 0)
                 currentAction = new Idle(Properties.Entidades.Player.Idle, new int[] { 8, 8, 8 });
         }
     }

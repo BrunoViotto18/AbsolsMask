@@ -7,6 +7,7 @@ public class Action
     protected int spriteWidth;
     protected int[] spriteTime;
     protected bool changeDirection;
+    protected int prioridade;
 
 
     protected int currentSprite = 0;
@@ -16,6 +17,10 @@ public class Action
     public bool ChangeDirection
     {
         get => changeDirection;
+    }
+    public int Prioridade
+    {
+        get => prioridade;
     }
 
 

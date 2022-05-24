@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Sprites\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Properties\Blocos.Designer.cs">
       <DependentUpon>Blocos.resx</DependentUpon>
       <DesignTime>True</DesignTime>
