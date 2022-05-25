@@ -48,8 +48,6 @@ public class JumpFallManager : Action
     public override Action Reset()
     {
         prioridade = 3;
-        currentSprite = 0;
-        spriteDelay = 0;
         changeDirection = true;
         foreach (Action act in actions)
             act.Reset();
