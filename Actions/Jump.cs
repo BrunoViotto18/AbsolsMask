@@ -3,7 +3,6 @@
 public class Jump : Action
 {
     private int maxJumpTime = 30;
-    private int maxJumpSpeed = 7;
 
 
     public Jump(Bitmap spritesheet, int[] spriteTime) : base(spritesheet, spriteTime)
@@ -32,6 +31,7 @@ public class Jump : Action
         currentSprite = 0;
         spriteDelay = 0;
         changeDirection = true;
+        maxJumpTime = 30;
         return this;
     }
 }

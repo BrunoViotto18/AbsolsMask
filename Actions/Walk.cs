@@ -24,4 +24,13 @@ public class Walk : Action
         if (!KeyPressManager.KeysPressed.Contains(Keys.Right) && !KeyPressManager.KeysPressed.Contains(Keys.Left))
             this.prioridade = -1;
     }
+
+    public override Action Reset()
+    {
+        prioridade = 1;
+        currentSprite = 0;
+        spriteDelay = 0;
+        changeDirection = true;
+        return this;
+    }
 }

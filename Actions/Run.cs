@@ -23,4 +23,13 @@ public class Run : Action
         if (!KeyPressManager.KeysPressed.Contains(Keys.Right) && !KeyPressManager.KeysPressed.Contains(Keys.Left) || !KeyPressManager.KeysPressed.Contains(Keys.Z))
             this.prioridade = -1;
     }
+
+    public override Action Reset()
+    {
+        prioridade = 2;
+        currentSprite = 0;
+        spriteDelay = 0;
+        changeDirection = true;
+        return this;
+    }
 }

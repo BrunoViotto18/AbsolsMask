@@ -25,7 +25,7 @@ public class JumpFallManager : Action
 
     private void calculateAction(Posicao posicao)
     {
-        if (KeyPressManager.KeysPressed.Contains(Keys.X) && doubleJump && currentAction.Prioridade == 3)
+        if (KeyPressManager.KeysPressed.Contains(Keys.X) && doubleJump && (currentAction.Prioridade == 3 || currentAction.Prioridade == 1))
         {
             currentAction = actions[0].Reset();
             doubleJump = false;
@@ -41,7 +41,7 @@ public class JumpFallManager : Action
 
         currentAction.RunAction(posicao, direction);
 
-        if (posicao.Bottom == 0)
+        if (posicao.BottomDistance == 0)
             this.prioridade = -1;
     }
 
@@ -51,6 +51,8 @@ public class JumpFallManager : Action
         currentSprite = 0;
         spriteDelay = 0;
         changeDirection = true;
+        foreach (Action act in actions)
+            act.Reset();
         return this;
     }
 }
