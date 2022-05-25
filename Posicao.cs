@@ -74,6 +74,16 @@ public class Posicao
     }
 
 
+    public int GravidadeX
+    {
+        get => gravidadeX;
+    }
+    public int GravidadeY
+    {
+        get => gravidadeY;
+    }
+
+
     public int Height
     {
         get => hitBox.Altura;

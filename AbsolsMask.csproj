@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AMServer\**" />
+    <EmbeddedResource Remove="AMServer\**" />
+    <None Remove="AMServer\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Blocos.Designer.cs">
       <DependentUpon>Blocos.resx</DependentUpon>
       <DesignTime>True</DesignTime>

@@ -30,6 +30,7 @@ public class Action
         this.spriteTime = spriteTime;
         this.spriteNum = spriteTime.Length;
         this.spriteWidth = spritesheet.Width / spriteNum;
+        this.changeDirection = true;
     }
 
 
@@ -65,5 +66,13 @@ public class Action
 
         if (currentSprite == spriteNum)
             currentSprite = 0;
+    }
+
+    public virtual Action Reset()
+    {
+        currentSprite = 0;
+        spriteDelay = 0;
+        changeDirection = true;
+        return this;
     }
 }

@@ -4,18 +4,10 @@ using System.Reflection;
 
 public class ActionManager
 {
-    private Action currentAction = new Idle(Properties.Entidades.Player.Idle, new int[] { 8, 8, 8 });
+    private List<Action> actions = new List<Action>();
+    private Action currentAction;
     private Posicao posicao;
     private Direction direcao;
-    private BuffsDebuffs buffDebuff;
-    private List<Action> actions = new List<Action>();
-
-    public ActionManager(Posicao posicao, Direction direcao, BuffsDebuffs buffDebuff, List<Action> actions){
-        this.posicao = posicao;
-        this.direcao = direcao;
-        this.buffDebuff = buffDebuff;
-        this.actions = actions;
-    }
 
     //Gets de posicao
     public int X
@@ -53,10 +45,20 @@ public class ActionManager
         get => posicao.Left;
     }
 
+
     public ActionManager(int X, int Y)
     {
         this.posicao = new Posicao(X, Y);
+
+        this.actions.Add(new Idle(Properties.Entidades.Player.Idle, new int[] { 8, 8, 8 }));
+        this.actions.Add(new Walk(Properties.Entidades.Player.Walk, new int[] { 5, 5, 5, 5 }));
+        this.actions.Add(new Run(Properties.Entidades.Player.Run, new int[] { 5, 5, 5, 5 }));
+        this.actions.Add(new JumpFallManager(Properties.Entidades.Player.Jump, Properties.Entidades.Player.Fall, new int[] { 5, 5, 5, 5 }, new int[] { 5, 5, 5, 5 }, posicao));
+
+        currentAction = actions[0];
+        direcao = Direction.Right;
     }
+
 
     // Calcula a ação atual da entidade
     public void CalculateAction()
@@ -90,12 +92,14 @@ public class ActionManager
         
         if (posicao.BottomDistance == 0)
         {
-            if (key && KeyPressManager.KeysPressed.Contains(Keys.Z) && currentAction.Prioridade < 2)
-                currentAction = new Run(Properties.Entidades.Player.Run, new int[] { 3, 3, 3, 3 });
+            if (KeyPressManager.KeysPressed.Contains(Keys.X) && currentAction.Prioridade < 3)
+                currentAction = actions[3].Reset();
+            else if (key && KeyPressManager.KeysPressed.Contains(Keys.Z) && currentAction.Prioridade < 2)
+                currentAction = actions[2].Reset();
             else if (key && currentAction.Prioridade < 1)
-                currentAction = new Walk(Properties.Entidades.Player.Walk, new int[] { 5, 5, 5, 5 });
+                currentAction = actions[1].Reset();
             else if (currentAction.Prioridade < 0)
-                currentAction = new Idle(Properties.Entidades.Player.Idle, new int[] { 8, 8, 8 });
+                currentAction = actions[0].Reset();
         }
     }
 
