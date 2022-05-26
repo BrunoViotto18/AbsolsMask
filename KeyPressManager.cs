@@ -4,6 +4,7 @@ public static class KeyPressManager
 {
     private static List<Keys> keysPressed = new List<Keys>();
 
+
     public static Keys[] KeysPressed
     {
         get
@@ -14,6 +15,7 @@ public static class KeyPressManager
         }
     }
 
+
     public static void AddKey(Keys key)
     {
         if (!keysPressed.Contains(key))
@@ -23,6 +25,11 @@ public static class KeyPressManager
     public static void RemoveKey(Keys key)
     {
         keysPressed.Remove(key);
+    }
+
+    public static Keys? LastKey(params Keys[] args)
+    {
+        return args.LastOrDefault(k => KeysPressed.Contains(k));
     }
 
     public static void Clear()

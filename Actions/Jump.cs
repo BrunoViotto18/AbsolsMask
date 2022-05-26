@@ -2,11 +2,15 @@
 
 public class Jump : Action
 {
+    private Posicao posicao;
     private int maxJumpTime = 30;
+    public int GravidadeY { get; private set; } = 0;
 
 
-    public Jump(Bitmap spritesheet, int[] spriteTime) : base(spritesheet, spriteTime)
+    public Jump(Bitmap spritesheet, int[] spriteTime, Posicao posicao) : base(spritesheet, spriteTime)
     {
+        this.posicao = posicao;
+        this.GravidadeY = posicao.GravidadeY;
         this.prioridade = 2;
     }
 
@@ -14,19 +18,32 @@ public class Jump : Action
     public override void RunAction(Posicao posicao, Direction direction)
     {
         if (maxJumpTime < 0)
+        {
+            posicao.GravidadeY = GravidadeY;
             return;
+        }
 
-        if (!KeyPressManager.KeysPressed.Contains(Keys.X))
+        if (KeyPressManager.LastKey(Keys.X) == null)
+        {
+            maxJumpTime = -1;
             this.prioridade = 1;
+        }
 
-        if (maxJumpTime % 5 == 0 && this.prioridade == 2)
-            posicao.SpeedY += posicao.GravidadeY >= 0 ? -1 - posicao.GravidadeY : 1 + posicao.GravidadeY;
+        if (GravidadeY != 0)
+        {
+            GravidadeY = posicao.GravidadeY;
+            posicao.GravidadeY = 0;
+        }
+
+        if (maxJumpTime % 4 != 0)
+            posicao.SpeedY -= 10;
 
         maxJumpTime--;
     }
 
     public override Action Reset()
     {
+        posicao.GravidadeY = GravidadeY;
         prioridade = 2;
         currentSprite = 0;
         spriteDelay = 0;

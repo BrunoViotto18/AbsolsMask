@@ -77,10 +77,12 @@ public class Posicao
     public int GravidadeX
     {
         get => gravidadeX;
+        set => gravidadeX = value;
     }
     public int GravidadeY
     {
         get => gravidadeY;
+        set => gravidadeY = value;
     }
 
 
@@ -434,6 +436,7 @@ public class Posicao
                 }
             }
         }
+
         speedX = 0;
     }
 

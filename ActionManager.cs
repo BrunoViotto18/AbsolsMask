@@ -93,13 +93,25 @@ public class ActionManager
         if (posicao.BottomDistance == 0)
         {
             if (KeyPressManager.KeysPressed.Contains(Keys.X) && currentAction.Prioridade < 3)
-                currentAction = actions[3].Reset();
+            {
+                currentAction.Reset();
+                currentAction = actions[3];
+            }
             else if (key && KeyPressManager.KeysPressed.Contains(Keys.Z) && currentAction.Prioridade < 2)
-                currentAction = actions[2].Reset();
+            {
+                currentAction.Reset();
+                currentAction = actions[2];
+            }
             else if (key && currentAction.Prioridade < 1)
-                currentAction = actions[1].Reset();
+            {
+                currentAction.Reset();
+                currentAction = actions[1];
+            }
             else if (currentAction.Prioridade < 0)
-                currentAction = actions[0].Reset();
+            {
+                currentAction.Reset();
+                currentAction = actions[0];
+            }
         }
     }
 

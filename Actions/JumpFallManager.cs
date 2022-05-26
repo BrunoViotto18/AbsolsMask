@@ -5,14 +5,12 @@ public class JumpFallManager : Action
     private Action[] actions = new Action[2];
     private Action currentAction;
     private bool doubleJump = true;
-    private Posicao posicao;
 
 
     public JumpFallManager(Bitmap jumpSpritesheet, Bitmap fallSpritesheet, int[] spriteTimeJump, int[] spriteTimeFall, Posicao posicao) : base(jumpSpritesheet, spriteTimeJump)
     {
-        actions[0] = (new Jump(jumpSpritesheet, spriteTimeJump));
+        actions[0] = (new Jump(jumpSpritesheet, spriteTimeJump, posicao));
         actions[1] = (new Fall(fallSpritesheet, spriteTimeFall));
-        this.posicao = posicao;
 
         if (posicao.BottomDistance == 0)
             this.currentAction = actions[0];
@@ -32,7 +30,13 @@ public class JumpFallManager : Action
         }
 
         if (posicao.SpeedY < 0 && currentAction.Prioridade < 3)
+        {
+            currentAction.Reset();
             currentAction = actions[1].Reset();
+        }
+
+        if (posicao.BottomDistance == 0)
+            this.prioridade = -1;
     }
 
     public override void RunAction(Posicao posicao, Direction direction)
@@ -41,16 +45,26 @@ public class JumpFallManager : Action
 
         currentAction.RunAction(posicao, direction);
 
-        if (posicao.BottomDistance == 0)
-            this.prioridade = -1;
+        switch (KeyPressManager.LastKey(Keys.Left, Keys.Right))
+        {
+            case Keys.Left:
+                if (posicao.SpeedX >= -4)
+                    posicao.SpeedX = -4;
+                break;
+
+            case Keys.Right:
+                if (posicao.SpeedX <= 4)
+                    posicao.SpeedX = 4;
+                break;
+        }
     }
 
     public override Action Reset()
     {
         prioridade = 3;
         changeDirection = true;
-        foreach (Action act in actions)
-            act.Reset();
+        for (int i = 0; i < actions.Length; i++)
+            actions[i] = actions[i].Reset();
         return this;
     }
 }
