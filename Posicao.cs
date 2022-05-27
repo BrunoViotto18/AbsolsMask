@@ -192,7 +192,7 @@ public class Posicao
 
     private int calculateTopCollision(Bloco[,] blocos, Entidades entidades)
     {
-        int top = 0;
+        int top = -1;
 
         for (int i = Left / 32; i <= Right / 32; i++)
         {
@@ -207,12 +207,6 @@ public class Posicao
                     else
                         distanceTop += 32;
 
-                    if (distanceTop > top && top != 0)
-                    {
-                        distanceTop = top;
-                        break;
-                    }
-
                     t++;
                     if (t == blocos.GetLength(1))
                         break;
@@ -221,14 +215,14 @@ public class Posicao
             }
         }
 
-        topDistance = Bottom;
+        topDistance = top;
 
         return top;
     }
 
     private int calculateBottomCollision(Bloco[,] blocos, Entidades entidades)
     {
-        int bottom = 0;
+        int bottom = -1;
 
         for (int i = Left / 32; i <= Right / 32; i++)
         {
@@ -242,12 +236,6 @@ public class Posicao
                         distanceBottom = Bottom % 32 + 1;
                     else
                         distanceBottom += 32;
-
-                    if (distanceBottom > bottom && bottom != 0)
-                    {
-                        distanceBottom = bottom;
-                        break;
-                    }
 
                     b--;
                     if (b < 0)
@@ -264,7 +252,7 @@ public class Posicao
 
     private int calculateLeftCollision(Bloco[,] blocos, Entidades entidades)
     {
-        int left = 0;
+        int left = -1;
 
         for (int i = Top / 32; i <= Bottom / 32; i++)
         {
@@ -278,12 +266,6 @@ public class Posicao
                         distanceLeft = 32 - Left % 32;
                     else
                         distanceLeft += 32;
-
-                    if (distanceLeft > left && left != 0)
-                    {
-                        distanceLeft = left;
-                        break;
-                    }
 
                     l++;
                     if (l == blocos.GetLength(0))
@@ -300,7 +282,7 @@ public class Posicao
 
     private int calculateRightCollision(Bloco[,] blocos, Entidades entidades)
     {
-        int right = 0;
+        int right = -1;
 
         for (int i = Top / 32; i <= Bottom / 32; i++)
         {
@@ -314,12 +296,6 @@ public class Posicao
                         distanceRight = Right % 32 + 1;
                     else
                         distanceRight += 32;
-
-                    if (distanceRight > right && right != 0)
-                    {
-                        distanceRight = right;
-                        break;
-                    }
 
                     r--;
                     if (r < 0)
@@ -379,7 +355,7 @@ public class Posicao
 
         for (int i = 0; i < 4; i++)
         {
-            if (bordas[i] == 0)
+            if (bordas[i] == -1)
                 continue;
 
             switch (bordasNome[i])

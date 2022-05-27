@@ -8,6 +8,7 @@ public class ActionManager
     private Action currentAction;
     private Posicao posicao;
     private Direction direcao;
+    private bool doubleJump;
 
     //Gets de posicao
     public int X
@@ -53,10 +54,12 @@ public class ActionManager
         this.actions.Add(new Idle(Properties.Entidades.Player.Idle, new int[] { 8, 8, 8 }));
         this.actions.Add(new Walk(Properties.Entidades.Player.Walk, new int[] { 5, 5, 5, 5 }));
         this.actions.Add(new Run(Properties.Entidades.Player.Run, new int[] { 5, 5, 5, 5 }));
-        this.actions.Add(new JumpFallManager(Properties.Entidades.Player.Jump, Properties.Entidades.Player.Fall, new int[] { 5, 5, 5, 5 }, new int[] { 5, 5, 5, 5 }, posicao));
+        this.actions.Add(new Fall(Properties.Entidades.Player.Fall, new int[] { 5, 5, 5, 5 }));
+        this.actions.Add(new Jump(Properties.Entidades.Player.Jump, new int[] { 10, 10, 5, 5 }, posicao));
 
         currentAction = actions[0];
         direcao = Direction.Right;
+        doubleJump = true;
     }
 
 
@@ -92,10 +95,11 @@ public class ActionManager
         
         if (posicao.BottomDistance == 0)
         {
-            if (KeyPressManager.KeysPressed.Contains(Keys.X) && currentAction.Prioridade < 3)
+            doubleJump = true;
+            if (KeyPressManager.KeysPressed.Contains(Keys.X) && currentAction.Prioridade < 4)
             {
                 currentAction.Reset();
-                currentAction = actions[3];
+                currentAction = actions[4];
             }
             else if (key && KeyPressManager.KeysPressed.Contains(Keys.Z) && currentAction.Prioridade < 2)
             {
@@ -113,7 +117,22 @@ public class ActionManager
                 currentAction = actions[0];
             }
         }
+        /*else
+        {
+            if (KeyPressManager.KeysPressed.Contains(Keys.X) && doubleJump && currentAction.Prioridade < 4)
+            {
+                doubleJump = false;
+                currentAction.Reset();
+                currentAction = actions[4];
+            }
+            else if (currentAction.Prioridade < 3)
+            {
+                currentAction.Reset();
+                currentAction = actions[3];
+            }
+        }*/
     }
+
 
     // Calcula a velocidade da ação
     public void RunCurrentAction()

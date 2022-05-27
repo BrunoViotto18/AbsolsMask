@@ -23,20 +23,7 @@ public class JumpFallManager : Action
 
     private void calculateAction(Posicao posicao)
     {
-        if (KeyPressManager.KeysPressed.Contains(Keys.X) && doubleJump && (currentAction.Prioridade == 3 || currentAction.Prioridade == 1))
-        {
-            currentAction = actions[0].Reset();
-            doubleJump = false;
-        }
-
-        if (posicao.SpeedY < 0 && currentAction.Prioridade < 3)
-        {
-            currentAction.Reset();
-            currentAction = actions[1].Reset();
-        }
-
-        if (posicao.BottomDistance == 0)
-            this.prioridade = -1;
+        
     }
 
     public override void RunAction(Posicao posicao, Direction direction)
@@ -44,19 +31,6 @@ public class JumpFallManager : Action
         calculateAction(posicao);
 
         currentAction.RunAction(posicao, direction);
-
-        switch (KeyPressManager.LastKey(Keys.Left, Keys.Right))
-        {
-            case Keys.Left:
-                if (posicao.SpeedX >= -4)
-                    posicao.SpeedX = -4;
-                break;
-
-            case Keys.Right:
-                if (posicao.SpeedX <= 4)
-                    posicao.SpeedX = 4;
-                break;
-        }
     }
 
     public override Action Reset()

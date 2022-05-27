@@ -2,53 +2,71 @@
 
 public class Jump : Action
 {
-    private Posicao posicao;
     private int maxJumpTime = 30;
     public int GravidadeY { get; private set; } = 0;
 
 
     public Jump(Bitmap spritesheet, int[] spriteTime, Posicao posicao) : base(spritesheet, spriteTime)
     {
-        this.posicao = posicao;
-        this.GravidadeY = posicao.GravidadeY;
-        this.prioridade = 2;
+        prioridade = 4;
     }
 
 
     public override void RunAction(Posicao posicao, Direction direction)
     {
-        if (maxJumpTime < 0)
+
+        switch (KeyPressManager.LastKey(Keys.Left, Keys.Right))
         {
-            posicao.GravidadeY = GravidadeY;
+            case Keys.Left:
+                posicao.SpeedX = -4;
+                break;
+
+            case Keys.Right:
+                posicao.SpeedX = 4;
+                break;
+        }
+
+        posicao.SpeedY -= 2;
+
+        if (KeyPressManager.LastKey(Keys.X) == null || posicao.TopDistance == 0)
+            this.prioridade = -1;
+    }
+
+
+    public override void RenderActionSprite(Posicao posicao, Graphics g, Direction direction)
+    {
+        if (direction == Direction.Right)
+            g.DrawImage(
+                spritesheet,
+                new Rectangle(posicao.X + posicao.Width / 2 - spriteWidth / 2, posicao.Bottom - spritesheet.Height + 1, spriteWidth, spritesheet.Height),
+                new Rectangle(spriteWidth * currentSprite, 0, spriteWidth, spritesheet.Height),
+                GraphicsUnit.Pixel
+            );
+        else
+            g.DrawImage(
+                spritesheet,
+                new Rectangle(posicao.Right - posicao.Width / 2 + spriteWidth / 2, posicao.Bottom - spritesheet.Height + 1, -spriteWidth, spritesheet.Height),
+                new Rectangle(spriteWidth * currentSprite, 0, spriteWidth, spritesheet.Height),
+                GraphicsUnit.Pixel
+            );
+
+        spriteDelay++;
+
+        if (spriteDelay < spriteTime[currentSprite])
             return;
-        }
 
-        if (KeyPressManager.LastKey(Keys.X) == null)
-        {
-            maxJumpTime = -1;
-            this.prioridade = 1;
-        }
+        spriteDelay = 0;
+        currentSprite++;
 
-        if (GravidadeY != 0)
-        {
-            GravidadeY = posicao.GravidadeY;
-            posicao.GravidadeY = 0;
-        }
-
-        if (maxJumpTime % 4 != 0)
-            posicao.SpeedY -= 10;
-
-        maxJumpTime--;
+        if (currentSprite == spriteNum)
+            currentSprite = 2;
     }
 
     public override Action Reset()
     {
-        posicao.GravidadeY = GravidadeY;
-        prioridade = 2;
         currentSprite = 0;
         spriteDelay = 0;
-        changeDirection = true;
-        maxJumpTime = 30;
+        prioridade = 4;
         return this;
     }
 }

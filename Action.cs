@@ -9,6 +9,9 @@ public class Action
     protected bool changeDirection;
     protected int prioridade;
 
+    protected int tempGravidadeX;
+    protected int tempGravidadeY;
+
 
     protected int currentSprite = 0;
     protected int spriteDelay = 0;
@@ -70,8 +73,6 @@ public class Action
 
     public virtual Action Reset()
     {
-        currentSprite = 0;
-        spriteDelay = 0;
         changeDirection = true;
         return this;
     }
