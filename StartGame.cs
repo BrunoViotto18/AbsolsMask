@@ -10,29 +10,24 @@ using System.Windows.Forms;
 
 namespace AbsolsMask
 {
-    public partial class TelaLogin : Form
+    public partial class StartGame : Form
     {
-        public TelaLogin()
+        public StartGame()
         {
             InitializeComponent();
         }
 
         private void bt_close_Click(object sender, EventArgs e)
         {
-            this.Close();
-        }
-
-        private void btLogin_Click(object sender, EventArgs e)
-        {
-            StartGame novo = new StartGame();
+            TelaLogin novo = new TelaLogin();
             this.Hide();
             novo.ShowDialog();
             this.Close();
         }
 
-        private void btRegister_Click(object sender, EventArgs e)
+        private void btNewGame_Click(object sender, EventArgs e)
         {
-            TelaCadastro novo = new TelaCadastro();
+            Game novo = new Game(12345);
             this.Hide();
             novo.ShowDialog();
             this.Close();
