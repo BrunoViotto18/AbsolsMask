@@ -2,11 +2,11 @@
 
 public class Jump : Action
 {
-    private int maxJumpTime = 30;
+    private int maxJumpTime = 20;
     public int GravidadeY { get; private set; } = 0;
 
 
-    public Jump(Bitmap spritesheet, int[] spriteTime, Posicao posicao) : base(spritesheet, spriteTime)
+    public Jump(Bitmap spritesheet, int[] spriteTime) : base(spritesheet, spriteTime)
     {
         prioridade = 4;
     }
@@ -14,7 +14,6 @@ public class Jump : Action
 
     public override void RunAction(Posicao posicao, Direction direction)
     {
-
         switch (KeyPressManager.LastKey(Keys.Left, Keys.Right))
         {
             case Keys.Left:
@@ -25,11 +24,14 @@ public class Jump : Action
                 posicao.SpeedX = 4;
                 break;
         }
+        
+        if (this.prioridade != -1 && maxJumpTime % 2 == 0)
+            posicao.SpeedY -= 2;
 
-        posicao.SpeedY -= 2;
-
-        if (KeyPressManager.LastKey(Keys.X) == null || posicao.TopDistance == 0)
+        if (KeyPressManager.LastKey(Keys.X) == Keys.None || posicao.TopDistance == 0 || maxJumpTime < 0)
             this.prioridade = -1;
+
+        maxJumpTime--;
     }
 
 
@@ -66,6 +68,7 @@ public class Jump : Action
     {
         currentSprite = 0;
         spriteDelay = 0;
+        maxJumpTime = 20;
         prioridade = 4;
         return this;
     }

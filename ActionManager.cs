@@ -55,7 +55,9 @@ public class ActionManager
         this.actions.Add(new Walk(Properties.Entidades.Player.Walk, new int[] { 5, 5, 5, 5 }));
         this.actions.Add(new Run(Properties.Entidades.Player.Run, new int[] { 5, 5, 5, 5 }));
         this.actions.Add(new Fall(Properties.Entidades.Player.Fall, new int[] { 5, 5, 5, 5 }));
-        this.actions.Add(new Jump(Properties.Entidades.Player.Jump, new int[] { 10, 10, 5, 5 }, posicao));
+        this.actions.Add(new Jump(Properties.Entidades.Player.Jump, new int[] { 3, 3, 5, 5 }));
+        this.actions.Add(new Attack(Properties.Entidades.Player.Attack, new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }));
+        this.actions.Add(new Dash(Properties.Entidades.Player.Dash, new int[] { 5, 5 }));
 
         currentAction = actions[0];
         direcao = Direction.Right;
@@ -93,9 +95,22 @@ public class ActionManager
 
         /* Calcular ação */
         
+        if (KeyPressManager.KeysPressed.Contains(Keys.Z) && currentAction.Prioridade < 6)
+        {
+            currentAction.Reset();
+            currentAction = actions[6];
+        }
+
+        if (KeyPressManager.KeysPressed.Contains(Keys.C) && currentAction.Prioridade < 5)
+        {
+            currentAction.Reset();
+            currentAction = actions[5];
+        }
+
         if (posicao.BottomDistance == 0)
         {
             doubleJump = true;
+
             if (KeyPressManager.KeysPressed.Contains(Keys.X) && currentAction.Prioridade < 4)
             {
                 currentAction.Reset();
@@ -117,7 +132,7 @@ public class ActionManager
                 currentAction = actions[0];
             }
         }
-        /*else
+        else
         {
             if (KeyPressManager.KeysPressed.Contains(Keys.X) && doubleJump && currentAction.Prioridade < 4)
             {
@@ -125,12 +140,12 @@ public class ActionManager
                 currentAction.Reset();
                 currentAction = actions[4];
             }
-            else if (currentAction.Prioridade < 3)
+            else if (currentAction.Prioridade < 3 && posicao.SpeedY < 0)
             {
                 currentAction.Reset();
                 currentAction = actions[3];
             }
-        }*/
+        }
     }
 
 
