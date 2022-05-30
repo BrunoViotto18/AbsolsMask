@@ -136,7 +136,7 @@ public class Posicao
 
 
     // Construtor
-    public Posicao(int X, int Y, int maxSpeedX=10, int maxSpeedY=5, int speedX=0, int speedY=0, int gravidadeY=2, int gravidadeX=0)
+    public Posicao(int X, int Y, int maxSpeedX=10, int maxSpeedY=10, int speedX=0, int speedY=0, int gravidadeY=2, int gravidadeX=0)
     {
         this.x = X;
         this.y = Y;
@@ -196,6 +196,9 @@ public class Posicao
 
         for (int i = Left / 32; i <= Right / 32; i++)
         {
+            if (blocos[i, (Top - 1) / 32] != null && top < 0)
+                top = 0;
+
             if (blocos[i, Top / 32] != null)
             {
                 int distanceTop = -1;
@@ -226,6 +229,9 @@ public class Posicao
 
         for (int i = Left / 32; i <= Right / 32; i++)
         {
+            if (blocos[i, (Bottom + 1) / 32] != null && bottom < 0)
+                bottom = 0;
+
             if (blocos[i, Bottom / 32] != null)
             {
                 int distanceBottom = -1;
@@ -256,6 +262,9 @@ public class Posicao
 
         for (int i = Top / 32; i <= Bottom / 32; i++)
         {
+            if (blocos[(Left - 1) / 32, i] != null && left < 0)
+                left = 0;
+
             if (blocos[Left / 32, i] != null)
             {
                 int distanceLeft = -1;
@@ -286,6 +295,9 @@ public class Posicao
 
         for (int i = Top / 32; i <= Bottom / 32; i++)
         {
+            if (blocos[(Right + 1) / 32, i] != null && right < 0)
+                right = 0;
+
             if (blocos[Right / 32, i] != null)
             {
                 int distanceRight = -1;

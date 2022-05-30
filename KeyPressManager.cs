@@ -29,7 +29,7 @@ public static class KeyPressManager
 
     public static Keys? LastKey(params Keys[] args)
     {
-        return args.LastOrDefault(k => KeysPressed.Contains(k));
+        return args.LastOrDefault(k => keysPressed.Contains(k));
     }
 
     public static void Clear()
