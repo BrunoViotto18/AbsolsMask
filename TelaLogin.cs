@@ -34,13 +34,10 @@ namespace AbsolsMask
             {
                 client.BaseAddress = new Uri("http://localhost:5141/");
                 var existe = await client.GetAsync($"User/login/{tbLogin.Text}/{tbSenha.Text}");
-                MessageBox.Show(await existe.Content.ReadAsStringAsync());
                 if (await existe.Content.ReadAsStringAsync() != "0")
                 {
                     var result = await client.PostAsync($"User/login/{tbLogin.Text}/{tbSenha.Text}", null);
                     string resultContent = await result.Content.ReadAsStringAsync();
-                    Console.WriteLine(resultContent);
-                    MessageBox.Show(resultContent);
                     StartGame novo = new StartGame();
                     this.Hide();
                     novo.ShowDialog();
@@ -48,7 +45,7 @@ namespace AbsolsMask
                 }
                 else
                 {
-                    MessageBox.Show("Usuario ja cadastrado");
+                    MessageBox.Show("Usuario não cadastrado");
                 }
             }
         }

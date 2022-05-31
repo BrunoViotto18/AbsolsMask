@@ -29,13 +29,11 @@ namespace AbsolsMask
             {
                 client.BaseAddress = new Uri("http://localhost:5141/");
                 var existe = await client.GetAsync($"User/verifica/{tbLogin.Text}/{tbSenha.Text}");
-                MessageBox.Show(await existe.Content.ReadAsStringAsync());
                 if(await existe.Content.ReadAsStringAsync() == "0")
                 {
                     var result = await client.PostAsync($"User/register/{tbLogin.Text}/{tbSenha.Text}", null);
                     string resultContent = await result.Content.ReadAsStringAsync();
                     Console.WriteLine(resultContent);
-                    MessageBox.Show(resultContent);
                     MessageBox.Show("Cadastro Realizado com sucesso");
                     TelaLogin novo = new TelaLogin();
                     this.Hide();
