@@ -95,40 +95,40 @@ public class ActionManager
 
         /* Calcular ação */
         
-        if (KeyPressManager.KeysPressed.Contains(Keys.Z) && currentAction.Prioridade < 6)
+        /*if (KeyPressManager.KeysPressed.Contains(Keys.Z) && currentAction.Prioridade < 6)
         {
-            currentAction.Reset();
+            currentAction.Reset(posicao);
             currentAction = actions[6];
         }
 
         if (KeyPressManager.KeysPressed.Contains(Keys.C) && currentAction.Prioridade < 5)
         {
-            currentAction.Reset();
+            currentAction.Reset(posicao);
             currentAction = actions[5];
-        }
+        }*/
 
         if (posicao.BottomDistance == 0)
         {
             doubleJump = true;
-
+            /*
             if (KeyPressManager.KeysPressed.Contains(Keys.X) && currentAction.Prioridade < 4)
             {
-                currentAction.Reset();
+                currentAction.Reset(posicao);
                 currentAction = actions[4];
-            }
-            else if (key && KeyPressManager.KeysPressed.Contains(Keys.Z) && currentAction.Prioridade < 2)
+            }*/
+            if (key && KeyPressManager.KeysPressed.Contains(Keys.Z) && currentAction.Prioridade < 2)
             {
-                currentAction.Reset();
+                currentAction.Reset(posicao);
                 currentAction = actions[2];
             }
             else if (key && currentAction.Prioridade < 1)
             {
-                currentAction.Reset();
+                currentAction.Reset(posicao);
                 currentAction = actions[1];
             }
             else if (currentAction.Prioridade < 0)
             {
-                currentAction.Reset();
+                currentAction.Reset(posicao);
                 currentAction = actions[0];
             }
         }
@@ -137,12 +137,12 @@ public class ActionManager
             if (KeyPressManager.KeysPressed.Contains(Keys.X) && doubleJump && currentAction.Prioridade < 4)
             {
                 doubleJump = false;
-                currentAction.Reset();
+                currentAction.Reset(posicao);
                 currentAction = actions[4];
             }
             else if (currentAction.Prioridade < 3 && posicao.SpeedY < 0)
             {
-                currentAction.Reset();
+                currentAction.Reset(posicao);
                 currentAction = actions[3];
             }
         }

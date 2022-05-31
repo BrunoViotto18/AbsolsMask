@@ -16,7 +16,7 @@ public class Attack : Action
             this.prioridade = -1;
     }
 
-    public override Action Reset()
+    public override Action Reset(Posicao posicao)
     {
         this.prioridade = 5;
         currentSprite = 0;

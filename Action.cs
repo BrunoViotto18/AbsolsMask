@@ -71,9 +71,10 @@ public class Action
             currentSprite = 0;
     }
 
-    public virtual Action Reset()
+    public virtual Action Reset(Posicao posicao)
     {
-        changeDirection = true;
+        this.currentSprite = 0;
+        this.spriteDelay = 0;
         return this;
     }
 }

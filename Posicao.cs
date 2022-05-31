@@ -17,7 +17,6 @@ public class Posicao
     private int bottomDistance;
     private int leftDistance;
 
-    private List<Keys> keysPressed = new List<Keys>();
     private static int maxTick = 4;
     private HitBox hitBox;
     private int tick = 0;
@@ -214,7 +213,9 @@ public class Posicao
                     if (t == blocos.GetLength(1))
                         break;
                 }
-                top = distanceTop;
+
+                if (distanceTop < top && distanceTop > 0 || top <= 0)
+                    top = distanceTop;
             }
         }
 
@@ -247,7 +248,9 @@ public class Posicao
                     if (b < 0)
                         break;
                 }
-                bottom = distanceBottom;
+
+                if ((distanceBottom < bottom || bottom <= 0) && distanceBottom > 0)
+                    bottom = distanceBottom;
             }
         }
 
@@ -280,7 +283,9 @@ public class Posicao
                     if (l == blocos.GetLength(0))
                         break;
                 }
-                left = distanceLeft;
+
+                if (distanceLeft < left && left > 0)
+                    left = distanceLeft;
             }
         }
 
@@ -313,7 +318,9 @@ public class Posicao
                     if (r < 0)
                         break;
                 }
-                right = distanceRight;
+
+                if (distanceRight < right && right > 0)
+                    right = distanceRight;
             }
         }
 
@@ -367,7 +374,7 @@ public class Posicao
 
         for (int i = 0; i < 4; i++)
         {
-            if (bordas[i] == -1)
+            if (bordas[i] <= -1)
                 continue;
 
             switch (bordasNome[i])

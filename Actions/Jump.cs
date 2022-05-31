@@ -64,7 +64,7 @@ public class Jump : Action
             currentSprite = 2;
     }
 
-    public override Action Reset()
+    public override Action Reset(Posicao posicao)
     {
         currentSprite = 0;
         spriteDelay = 0;
