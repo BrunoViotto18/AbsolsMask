@@ -25,7 +25,7 @@ public class Walk : Action
             this.prioridade = -1;
     }
 
-    public override Action Reset()
+    public override Action Reset(Posicao posicao)
     {
         prioridade = 1;
         currentSprite = 0;

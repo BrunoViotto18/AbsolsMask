@@ -53,7 +53,7 @@ public class Fall : Action
             currentSprite = 1;
     }
 
-    public override Action Reset()
+    public override Action Reset(Posicao posicao)
     {
         currentSprite = 0;
         spriteDelay = 0;
