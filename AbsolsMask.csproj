@@ -15,6 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Properties\Ambiente.Designer.cs">
+      <DependentUpon>Ambiente.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Properties\Blocos.Designer.cs">
       <DependentUpon>Blocos.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -38,6 +43,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Properties\Ambiente.resx">
+      <LastGenOutput>Ambiente.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Blocos.resx">
       <LastGenOutput>Blocos.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>

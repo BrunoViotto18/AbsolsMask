@@ -38,7 +38,7 @@ namespace AbsolsMask
                 {
                     var result = await client.PostAsync($"User/login/{tbLogin.Text}/{tbSenha.Text}", null);
                     string resultContent = await result.Content.ReadAsStringAsync();
-                    StartGame novo = new StartGame();
+                    StartGame novo = new StartGame(resultContent);
                     this.Hide();
                     novo.ShowDialog();
                     this.Close();
