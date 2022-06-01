@@ -52,6 +52,8 @@ public class Game : Form
         // DEBUG
         Colors.Add(Color.FromArgb(170, 0, 255));
         Blocos.Add(new Debug());
+
+        // ADICIONAR MAIS BLOCOS
     }
 
 
