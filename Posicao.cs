@@ -72,6 +72,17 @@ public class Posicao
         }
     }
 
+    public int MaxSpeedX
+    {
+        get => maxSpeedX;
+        set => maxSpeedX = value;
+    }
+    public int MaxSpeedY
+    {
+        get => maxSpeedY;
+        set => maxSpeedY = value;
+    }
+
 
     public int GravidadeX
     {
@@ -193,29 +204,31 @@ public class Posicao
     {
         int top = -1;
 
+        // Checa toda a borda superior
         for (int i = Left / 32; i <= Right / 32; i++)
         {
+            // Checa se não está em colisão mas esteja em contato com o bloco
             if (blocos[i, (Top - 1) / 32] != null && top < 0)
                 top = 0;
 
+            // Checa se está em colisão
             if (blocos[i, Top / 32] != null)
             {
-                int distanceTop = -1;
-                int t = Top / 32;
+                int distanceTop = 32 - Top % 32;
+                int t = Top / 32 + 1;
+
+                // Checa quantos pixeis para dentro está no bloco
                 while (blocos[i, t] != null)
                 {
-                    if (t == Top / 32)
-                        distanceTop = 32 - Top % 32;
-                    else
-                        distanceTop += 32;
-
+                    distanceTop += 32;
                     t++;
                     if (t == blocos.GetLength(1))
+                    {
+                        distanceTop = top;
                         break;
+                    }
                 }
-
-                if (distanceTop < top && distanceTop > 0 || top <= 0)
-                    top = distanceTop;
+                top = distanceTop;
             }
         }
 
@@ -235,22 +248,20 @@ public class Posicao
 
             if (blocos[i, Bottom / 32] != null)
             {
-                int distanceBottom = -1;
-                int b = Bottom / 32;
+                int distanceBottom = Bottom % 32 + 1;
+                int b = Bottom / 32 - 1;
                 while (blocos[i, b] != null)
                 {
-                    if (b == Bottom / 32)
-                        distanceBottom = Bottom % 32 + 1;
-                    else
-                        distanceBottom += 32;
-
+                    distanceBottom += 32;
                     b--;
                     if (b < 0)
+                    {
+                        distanceBottom = bottom;
                         break;
+                    }
                 }
 
-                if ((distanceBottom < bottom || bottom <= 0) && distanceBottom > 0)
-                    bottom = distanceBottom;
+                bottom = distanceBottom;
             }
         }
 
@@ -270,22 +281,20 @@ public class Posicao
 
             if (blocos[Left / 32, i] != null)
             {
-                int distanceLeft = -1;
-                int l = Left / 32;
+                int distanceLeft = 32 - Left % 32;
+                int l = Left / 32 + 1;
                 while (blocos[l, i] != null)
                 {
-                    if (l == Left / 32)
-                        distanceLeft = 32 - Left % 32;
-                    else
-                        distanceLeft += 32;
-
+                    distanceLeft += 32;
                     l++;
                     if (l == blocos.GetLength(0))
+                    {
+                        distanceLeft = left;
                         break;
+                    }
                 }
 
-                if (distanceLeft < left && left > 0)
-                    left = distanceLeft;
+                left = distanceLeft;
             }
         }
 
@@ -305,22 +314,20 @@ public class Posicao
 
             if (blocos[Right / 32, i] != null)
             {
-                int distanceRight = -1;
-                int r = Right / 32;
-                while (r > 0 && r < blocos.GetLength(0) && blocos[r, i] != null)
+                int distanceRight = Right % 32 + 1;
+                int r = Right / 32 - 1;
+                while (blocos[r, i] != null)
                 {
-                    if (r == Right / 32)
-                        distanceRight = Right % 32 + 1;
-                    else
-                        distanceRight += 32;
-
+                    distanceRight += 32;
                     r--;
                     if (r < 0)
+                    {
+                        distanceRight = right;
                         break;
+                    }
                 }
 
-                if (distanceRight < right && right > 0)
-                    right = distanceRight;
+                right = distanceRight;
             }
         }
 
@@ -374,7 +381,7 @@ public class Posicao
 
         for (int i = 0; i < 4; i++)
         {
-            if (bordas[i] <= -1)
+            if (bordas[i] <= 0)
                 continue;
 
             switch (bordasNome[i])

@@ -8,7 +8,9 @@ public class ActionManager
     private Action currentAction;
     private Posicao posicao;
     private Direction direcao;
+
     private bool doubleJump;
+    private bool dash;
 
     //Gets de posicao
     public int X
@@ -57,11 +59,12 @@ public class ActionManager
         this.actions.Add(new Fall(Properties.Entidades.Player.Fall, new int[] { 5, 5, 5, 5 }));
         this.actions.Add(new Jump(Properties.Entidades.Player.Jump, new int[] { 3, 3, 5, 5 }));
         this.actions.Add(new Attack(Properties.Entidades.Player.Attack, new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }));
-        this.actions.Add(new Dash(Properties.Entidades.Player.Dash, new int[] { 5, 5 }));
+        this.actions.Add(new Dash(Properties.Entidades.Player.Dash, new int[] { 3, 3 }));
 
         currentAction = actions[0];
         direcao = Direction.Right;
         doubleJump = true;
+        dash = true;
     }
 
 
@@ -74,7 +77,7 @@ public class ActionManager
         if (currentAction.ChangeDirection)
         {
             key = true;
-            var keyDirection = KeyPressManager.KeysPressed.LastOrDefault(k => k == Keys.Left || k == Keys.Right);
+            var keyDirection = KeyPressManager.LastKey(Keys.Right, Keys.Left);
 
             switch (keyDirection)
             {
@@ -95,28 +98,28 @@ public class ActionManager
 
         /* Calcular ação */
         
-        /*if (KeyPressManager.KeysPressed.Contains(Keys.Z) && currentAction.Prioridade < 6)
+        if (KeyPressManager.KeysPressed.Contains(Keys.Z) && dash && currentAction.Prioridade < 6)
         {
+            dash = false;
             currentAction.Reset(posicao);
             currentAction = actions[6];
         }
-
-        if (KeyPressManager.KeysPressed.Contains(Keys.C) && currentAction.Prioridade < 5)
+        else if (KeyPressManager.KeysPressed.Contains(Keys.C) && currentAction.Prioridade < 5)
         {
             currentAction.Reset(posicao);
             currentAction = actions[5];
-        }*/
-
-        if (posicao.BottomDistance == 0)
+        }
+        else if (posicao.BottomDistance == 0)
         {
             doubleJump = true;
-            /*
+            dash = true;
+            
             if (KeyPressManager.KeysPressed.Contains(Keys.X) && currentAction.Prioridade < 4)
             {
                 currentAction.Reset(posicao);
                 currentAction = actions[4];
-            }*/
-            if (key && KeyPressManager.KeysPressed.Contains(Keys.Z) && currentAction.Prioridade < 2)
+            }
+            else if (key && KeyPressManager.KeysPressed.Contains(Keys.Z) && currentAction.Prioridade < 2)
             {
                 currentAction.Reset(posicao);
                 currentAction = actions[2];
@@ -140,7 +143,7 @@ public class ActionManager
                 currentAction.Reset(posicao);
                 currentAction = actions[4];
             }
-            else if (currentAction.Prioridade < 3 && posicao.SpeedY < 0)
+            else if (currentAction.Prioridade < 3 && posicao.SpeedY <= 0)
             {
                 currentAction.Reset(posicao);
                 currentAction = actions[3];

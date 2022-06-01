@@ -1,6 +1,5 @@
 ﻿namespace AbsolsMask;
 
-[Walk]
 public class Walk : Action
 {
     public Walk(Bitmap spritesheet, int[] spriteTime) : base(spritesheet, spriteTime)
