@@ -98,12 +98,14 @@ public class ActionManager
 
         /* Calcular ação */
         
-        if (KeyPressManager.KeysPressed.Contains(Keys.Z) && dash && currentAction.Prioridade < 6)
+        // Dash
+        if (KeyPressManager.KeysPressed.Contains(Keys.A) && dash && currentAction.Prioridade < 6)
         {
             dash = false;
             currentAction.Reset(posicao);
             currentAction = actions[6];
         }
+        // Ataque
         else if (KeyPressManager.KeysPressed.Contains(Keys.C) && currentAction.Prioridade < 5)
         {
             currentAction.Reset(posicao);
@@ -114,21 +116,25 @@ public class ActionManager
             doubleJump = true;
             dash = true;
             
+            // Pulo
             if (KeyPressManager.KeysPressed.Contains(Keys.X) && currentAction.Prioridade < 4)
             {
                 currentAction.Reset(posicao);
                 currentAction = actions[4];
             }
+            // Correr
             else if (key && KeyPressManager.KeysPressed.Contains(Keys.Z) && currentAction.Prioridade < 2)
             {
                 currentAction.Reset(posicao);
                 currentAction = actions[2];
             }
+            // Andar
             else if (key && currentAction.Prioridade < 1)
             {
                 currentAction.Reset(posicao);
                 currentAction = actions[1];
             }
+            // Parado
             else if (currentAction.Prioridade < 0)
             {
                 currentAction.Reset(posicao);
@@ -137,12 +143,14 @@ public class ActionManager
         }
         else
         {
+            // Pulo Duplo
             if (KeyPressManager.KeysPressed.Contains(Keys.X) && doubleJump && currentAction.Prioridade < 4)
             {
                 doubleJump = false;
                 currentAction.Reset(posicao);
                 currentAction = actions[4];
             }
+            // Caindo
             else if (currentAction.Prioridade < 3 && posicao.SpeedY <= 0)
             {
                 currentAction.Reset(posicao);
@@ -152,13 +160,13 @@ public class ActionManager
     }
 
 
-    // Calcula a velocidade da ação
+    // Calcula a qunatidade de movimento da ação
     public void RunCurrentAction()
     {
         currentAction.RunAction(posicao, direcao);
     }
 
-    // Calcula o movimento da ação
+    // Calcula o movimentação da ação
     public void CalculateActionMoviment(Bloco[,] blocos, Entidades entidades)
     {
         this.posicao.CalculateMoviment(blocos, entidades);

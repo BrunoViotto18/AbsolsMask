@@ -53,7 +53,9 @@ public class Game : Form
         Colors.Add(Color.FromArgb(170, 0, 255));
         Blocos.Add(new Debug());
 
-        // ADICIONAR MAIS BLOCOS
+        // PEDRA
+        Colors.Add(Color.FromArgb(96, 125, 139));
+        Blocos.Add(new Pedra());
     }
 
 

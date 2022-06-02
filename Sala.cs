@@ -30,7 +30,7 @@ public class Sala
         this.entidades = new Entidades();
         this.entidades.Player = new Player(10, 10, 150, 150);
         //this.entidades.player = new Player(550, 100);
-        this.salaImage = Properties.Salas.debug1;
+        this.salaImage = Properties.Salas.Teste;
         buildRoom();
     }
 
@@ -53,9 +53,18 @@ public class Sala
     // Converte um pixel em um bloco
     private Bloco pixelToBlock(int coluna, int linha)
     {
-        int index = Game.Colors.IndexOf(this.salaImage.GetPixel(coluna, linha));
+        Color color = salaImage.GetPixel(coluna, linha);
+
+        int index = Game.Colors.IndexOf(Game.Colors.FirstOrDefault(
+            c => c.HasValue &&
+            c.Value.R == color.R &&
+            c.Value.G == color.G &&
+            c.Value.B == color.B
+            ));
+
         if (index == -1)
             index = 0;
+
         return Game.Blocos[index];
     }
 
