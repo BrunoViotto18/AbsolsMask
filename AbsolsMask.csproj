@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\Ambiente.Designer.cs">
-      <DependentUpon>Ambiente.resx</DependentUpon>
+    <Compile Update="Properties\Background.Designer.cs">
+      <DependentUpon>Background.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
@@ -43,8 +43,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Properties\Ambiente.resx">
-      <LastGenOutput>Ambiente.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Properties\Background.resx">
+      <LastGenOutput>Background.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\Blocos.resx">

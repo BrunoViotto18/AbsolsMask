@@ -17,7 +17,7 @@ public class Posicao
     private int bottomDistance;
     private int leftDistance;
 
-    private static int maxTick = 4;
+    private static int maxTick = 2;
     private HitBox hitBox;
     private int tick = 0;
 
@@ -146,7 +146,7 @@ public class Posicao
 
 
     // Construtor
-    public Posicao(int X, int Y, int maxSpeedX=10, int maxSpeedY=10, int speedX=0, int speedY=0, int gravidadeY=2, int gravidadeX=0)
+    public Posicao(int X, int Y, int maxSpeedX=10, int maxSpeedY=10, int speedX=0, int speedY=0, int gravidadeY=1, int gravidadeX=0)
     {
         this.x = X;
         this.y = Y;
@@ -228,6 +228,10 @@ public class Posicao
                         break;
                     }
                 }
+
+                if (distanceTop > top && top > 0)
+                    distanceTop = top;
+
                 top = distanceTop;
             }
         }
@@ -260,6 +264,9 @@ public class Posicao
                         break;
                     }
                 }
+
+                if (distanceBottom > bottom && bottom > 0)
+                    distanceBottom = bottom;
 
                 bottom = distanceBottom;
             }
@@ -294,6 +301,9 @@ public class Posicao
                     }
                 }
 
+                if (distanceLeft > left && left > 0)
+                    distanceLeft = left;
+
                 left = distanceLeft;
             }
         }
@@ -326,6 +336,9 @@ public class Posicao
                         break;
                     }
                 }
+
+                if (distanceRight > right && right > 0)
+                    distanceRight = right;
 
                 right = distanceRight;
             }

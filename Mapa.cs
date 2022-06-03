@@ -30,6 +30,11 @@ public class Mapa
         this.salaAtual.CalculateEntitiesMoviment();
     }
 
+    public void RenderMapaBackground(Graphics gSala)
+    {
+        this.salaAtual.RenderBackground(gSala);
+    }
+
     // Renderiza o mapa
     public void RenderMapa(Graphics gSala)
     {

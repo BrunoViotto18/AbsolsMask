@@ -100,6 +100,7 @@ public class Game : Form
     // Renderiza o jogo (Sala)
     private void RenderGame(Graphics gSala)
     {
+        this.map.RenderMapaBackground(gSala);
         this.map.RenderMapa(gSala);
     }
 

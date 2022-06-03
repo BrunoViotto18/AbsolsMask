@@ -22,14 +22,14 @@ namespace AbsolsMask.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Ambiente {
+    internal class Background {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Ambiente() {
+        internal Background() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace AbsolsMask.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AbsolsMask.Properties.Ambiente", typeof(Ambiente).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AbsolsMask.Properties.Background", typeof(Background).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,12 @@ namespace AbsolsMask.Properties {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a .
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static string id {
+        internal static System.Drawing.Bitmap Trevisan {
             get {
-                return ResourceManager.GetString("id", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a .
-        /// </summary>
-        internal static string login {
-            get {
-                return ResourceManager.GetString("login", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a .
-        /// </summary>
-        internal static string password {
-            get {
-                return ResourceManager.GetString("password", resourceCulture);
+                object obj = ResourceManager.GetObject("Trevisan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }
