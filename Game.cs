@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using System.Media;
 
 namespace AbsolsMask;
 
@@ -173,6 +174,7 @@ public class Game : Form
             pbTela.Image = bmpCamera;
         };
 
+        new System.Media.SoundPlayer(Properties.Songs.SongOfStorms).Play();
 
         this.tm.Start();
     }

@@ -15,6 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Properties\Songs.Designer.cs">
+      <DependentUpon>Songs.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Properties\Background.Designer.cs">
       <DependentUpon>Background.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -43,6 +48,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Properties\Songs.resx">
+      <LastGenOutput>Songs.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Background.resx">
       <LastGenOutput>Background.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
