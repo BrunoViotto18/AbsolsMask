@@ -23,13 +23,12 @@ public class Sala
     {
         get => this.entidades.Player;
     }
-
-
     // Construtor
     public Sala()
     {
         this.entidades = new Entidades();
         this.entidades.Player = new Player(10, 10, 150, 150);
+        this.entidades.Inimigos.Append(new Goomba(10, 10, 150, 150));
         //this.entidades.player = new Player(550, 100);
         this.salaImage = Properties.Salas.Teste;
         this.salaBackground = Properties.Background.Trevisan;

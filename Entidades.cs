@@ -3,7 +3,7 @@
 public struct Entidades
 {
     private Entidade player;
-    private List<Entidade> inimigos;
+    private List<Entidade> inimigos = new List<Entidade>();
     private Entidade? boss;
     private List<Entidade> particulas;
 

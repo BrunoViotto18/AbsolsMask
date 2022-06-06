@@ -4,10 +4,10 @@ using System.Reflection;
 
 public class ActionManager
 {
-    private List<Action> actions = new List<Action>();
-    private Action currentAction;
-    private Posicao posicao;
-    private Direction direcao;
+    protected List<Action> actions = new List<Action>();
+    protected Action currentAction;
+    protected Posicao posicao;
+    protected Direction direcao;
 
     private bool doubleJump;
     private bool dash;
@@ -69,7 +69,7 @@ public class ActionManager
 
 
     // Calcula a ação atual da entidade
-    public void CalculateAction()
+    public virtual void CalculateAction()
     {
         /* Calcular direcao */
 
@@ -94,7 +94,6 @@ public class ActionManager
                     break;
             }
         }
-
 
         /* Calcular ação */
         

@@ -15,6 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Properties\Entidades\Inimigo.Designer.cs">
+      <DependentUpon>Inimigo.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Properties\Songs.Designer.cs">
       <DependentUpon>Songs.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -48,6 +53,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Properties\Entidades\Inimigo.resx">
+      <LastGenOutput>Inimigo.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Songs.resx">
       <LastGenOutput>Songs.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
