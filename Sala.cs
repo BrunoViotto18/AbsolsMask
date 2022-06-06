@@ -144,5 +144,7 @@ public class Sala
     private void RenderEntities(Graphics g)
     {
         this.entidades.Player.RenderAction(g);
+        foreach (var inimigo in entidades.Inimigos)
+            inimigo.RenderAction(g);
     }
 }
