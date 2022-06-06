@@ -32,7 +32,7 @@ namespace AbsolsMask
             };
             using (var client = new HttpClient(httpClientHandler))
             {
-                client.BaseAddress = new Uri("http://localhost:5141/");
+                client.BaseAddress = new Uri("https://absolsmaks.azurewebsites.net/");
                 var existe = await client.GetAsync($"User/login/{tbLogin.Text}/{tbSenha.Text}");
                 if (await existe.Content.ReadAsStringAsync() != "0")
                 {
