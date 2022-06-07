@@ -20,6 +20,8 @@ public class Game : Form
 
     private PictureBox pbTela;
 
+    Bitmap background;
+
 
     // GET & SET
     public Random RNG
@@ -30,9 +32,10 @@ public class Game : Form
 
 
     // Construtor
-    public Game(int seed)
+    public Game(int seed, Bitmap background)
     {
         this.seed = seed;
+        this.background = background;
 
         InitializeComponent();
     }
@@ -141,7 +144,7 @@ public class Game : Form
 
 
         // Criação de objetos
-        this.map = new Mapa();
+        this.map = new Mapa(background);
 
 
         // Criação dos objetos gráficos

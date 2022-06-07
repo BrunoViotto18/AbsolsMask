@@ -16,9 +16,9 @@ public class Mapa
 
 
     // Construtor
-    public Mapa()
+    public Mapa(Bitmap background)
     {
-        this.salaAtual = new Sala();
+        this.salaAtual = new Sala(background);
     }
 
 
