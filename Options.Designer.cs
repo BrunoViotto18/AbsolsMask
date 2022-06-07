@@ -57,6 +57,7 @@
             this.btCancel.TabIndex = 8;
             this.btCancel.Text = "Cancel";
             this.btCancel.UseVisualStyleBackColor = false;
+            this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
             // 
             // pictureBox1
             // 
@@ -110,6 +111,7 @@
             this.bt1.TabIndex = 13;
             this.bt1.Text = "Confirm";
             this.bt1.UseVisualStyleBackColor = false;
+            this.bt1.Click += new System.EventHandler(this.bt1_Click);
             // 
             // bt2
             // 
@@ -123,6 +125,7 @@
             this.bt2.TabIndex = 14;
             this.bt2.Text = "Confirm";
             this.bt2.UseVisualStyleBackColor = false;
+            this.bt2.Click += new System.EventHandler(this.bt2_Click);
             // 
             // bt3
             // 
@@ -136,6 +139,7 @@
             this.bt3.TabIndex = 15;
             this.bt3.Text = "Confirm";
             this.bt3.UseVisualStyleBackColor = false;
+            this.bt3.Click += new System.EventHandler(this.bt3_Click);
             // 
             // bt4
             // 
@@ -149,6 +153,7 @@
             this.bt4.TabIndex = 16;
             this.bt4.Text = "Confirm";
             this.bt4.UseVisualStyleBackColor = false;
+            this.bt4.Click += new System.EventHandler(this.bt4_Click);
             // 
             // label1
             // 

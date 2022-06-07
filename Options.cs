@@ -12,9 +12,40 @@ namespace AbsolsMask
 {
     public partial class Options : Form
     {
+        public Bitmap bitmap = Properties.Background.Trevisan;
+
         public Options()
         {
             InitializeComponent();
+        }
+
+        private void bt1_Click(object sender, EventArgs e)
+        {
+            bitmap = Properties.Background.luis;
+            this.Close();
+        }
+
+        private void bt2_Click(object sender, EventArgs e)
+        {
+            bitmap = Properties.Background.leo;
+            this.Close();
+        }
+
+        private void bt3_Click(object sender, EventArgs e)
+        {
+            bitmap = Properties.Background.Trevisan;
+            this.Close();
+        }
+
+        private void bt4_Click(object sender, EventArgs e)
+        {
+            bitmap = Properties.Background.bizio;
+            this.Close();
+        }
+
+        private void btCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

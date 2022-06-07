@@ -24,12 +24,12 @@ public class Sala
         get => this.entidades.Player;
     }
     // Construtor
-    public Sala()
+    public Sala(Bitmap backgorund)
     {
         this.entidades = new Entidades(new Player(10, 10, 150, 150));
         this.entidades.addEnemy(new Goomba(10, 10, 200, 200));
         this.salaImage = Properties.Salas.Teste;
-        this.salaBackground = Properties.Background.Trevisan;
+        this.salaBackground = backgorund;
         buildRoom();
     }
 

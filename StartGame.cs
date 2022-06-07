@@ -15,6 +15,8 @@ namespace AbsolsMask
     public partial class StartGame : Form
     {
         string texto;
+        Options options = new Options();
+
         public StartGame(string text)
         {
             InitializeComponent();
@@ -68,7 +70,7 @@ namespace AbsolsMask
                 
                 MessageBox.Show(texto);
                 */
-                Game game = new(12345);
+                Game game = new(12345, options.bitmap);
                 this.Hide();
                 game.ShowDialog();
                 this.Close();
@@ -77,7 +79,9 @@ namespace AbsolsMask
 
         private void btOptions_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            options.ShowDialog();
+            this.Show();
         }
     }
 }
