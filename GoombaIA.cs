@@ -7,7 +7,7 @@ public class GoombaIA : ActionManager
     {
         this.actions = new List<Action>();
         actions.Add(new GoombaWalk(Properties.Entidades.Inimigo.Inseto, new int[] { 5, 5, 5 }));
-        this.posicao = new Posicao(X, Y);
+        this.posicao = new Posicao(X, Y, 30 ,50);
 
 
         currentAction = actions[0];

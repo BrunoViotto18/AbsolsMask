@@ -12,11 +12,11 @@ public class GoombaWalk : Action
         switch (direction)
         {
             case Direction.Left:
-                posicao.SpeedX = -1;
+                posicao.SpeedX = -2;
                 break;
 
             case Direction.Right:
-                posicao.SpeedX = 1;
+                posicao.SpeedX = 2;
                 break;
         }
     }

@@ -3,7 +3,7 @@
 public struct Entidades
 {
     private Entidade player;
-    private List<Entidade> inimigos = new List<Entidade>();
+    private List<Entidade> inimigos;
     private Entidade? boss;
     private List<Entidade> particulas;
 
@@ -32,6 +32,20 @@ public struct Entidades
     public List<Entidade> Particulas
     {
         get => particulas;
+    }
+
+    public Entidades(Player player)
+    {
+        this.player = player;
+        this.inimigos = new List<Entidade>();
+        this.boss = null;
+        this.particulas = new List<Entidade>();
+    }
+
+    public void addEnemy(params Entidade[] enemies)
+    {
+        foreach (var inimigo in enemies)
+            inimigos.Add(inimigo);
     }
 }
 

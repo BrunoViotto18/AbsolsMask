@@ -51,7 +51,7 @@ public class ActionManager
 
     public ActionManager(int X, int Y)
     {
-        this.posicao = new Posicao(X, Y);
+        this.posicao = new Posicao(X, Y, 56, 20);
 
         this.actions.Add(new Idle(Properties.Entidades.Player.Idle, new int[] { 8, 8, 8 }));
         this.actions.Add(new Walk(Properties.Entidades.Player.Walk, new int[] { 5, 5, 5, 5 }));

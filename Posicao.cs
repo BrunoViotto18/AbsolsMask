@@ -146,7 +146,7 @@ public class Posicao
 
 
     // Construtor
-    public Posicao(int X, int Y, int maxSpeedX=10, int maxSpeedY=10, int speedX=0, int speedY=0, int gravidadeY=1, int gravidadeX=0)
+    public Posicao(int X, int Y, int altura, int largura, int maxSpeedX=10, int maxSpeedY=10, int speedX=0, int speedY=0, int gravidadeY=1, int gravidadeX=0)
     {
         this.x = X;
         this.y = Y;
@@ -156,7 +156,7 @@ public class Posicao
         this.speedY = speedY;
         this.gravidadeX = gravidadeX;
         this.gravidadeY = gravidadeY;
-        this.hitBox = new HitBox(56, 20);
+        this.hitBox = new HitBox(altura, largura);
     }
 
 

@@ -26,10 +26,8 @@ public class Sala
     // Construtor
     public Sala()
     {
-        this.entidades = new Entidades();
-        this.entidades.Player = new Player(10, 10, 150, 150);
-        this.entidades.Inimigos.Append(new Goomba(10, 10, 150, 150));
-        //this.entidades.player = new Player(550, 100);
+        this.entidades = new Entidades(new Player(10, 10, 150, 150));
+        this.entidades.addEnemy(new Goomba(10, 10, 200, 200));
         this.salaImage = Properties.Salas.Teste;
         this.salaBackground = Properties.Background.Trevisan;
         buildRoom();
@@ -75,6 +73,8 @@ public class Sala
     public void CalculateEntitiesMoviment()
     {
         this.entidades.Player.CalculateSelfMoviment(this.blocos, this.entidades);
+        foreach (var inimigo in entidades.Inimigos)
+            inimigo.CalculateSelfMoviment(this.blocos, this.entidades);
     }
 
 
