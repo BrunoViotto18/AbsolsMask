@@ -161,30 +161,6 @@ public class Posicao
 
 
     // Métodos
-    private void calculateKeysPressed()
-    {
-        foreach (Keys key in KeyPressManager.KeysPressed)
-        {
-            switch (key)
-            {
-                case Keys.Up:
-                    speedY = -5;
-                    break;
-
-                //case Keys.Right:
-                //    speedX = dx;
-                //    break;
-
-                case Keys.Down:
-                    speedY = 5;
-                    break;
-
-                //case Keys.Left:
-                //    speedX = -dx;
-                //    break;
-            }
-        }
-    }
 
     // Calcula a gravidade
     private void calculateGravity()
@@ -199,6 +175,20 @@ public class Posicao
         this.speedY += this.gravidadeY;
         tick = 0;
     }
+
+
+    public void calculateEntityCollision(Entidades entidades, bool recoil)
+    {
+        foreach (var inimigo in entidades.Inimigos)
+        {
+            if (inimigo.Left < Right && inimigo.Right > Left &&
+                inimigo.Top < Bottom && inimigo.Bottom > Top)
+            {
+
+            }
+        }
+    }
+
 
     private int calculateTopCollision(Bloco[,] blocos, Entidades entidades)
     {
@@ -458,7 +448,6 @@ public class Posicao
     // Calcula o movimento da entidade
     public void CalculateMoviment(Bloco[,] blocos, Entidades entidades)
     {
-        calculateKeysPressed();
         calculateGravity();
 
         this.X += speedX;
