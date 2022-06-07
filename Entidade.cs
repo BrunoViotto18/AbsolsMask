@@ -42,6 +42,12 @@ public abstract class Entidade
         get => actionManager.Left;
     }
 
+    public int? HitboxDamage
+    {
+        get => actionManager.HitboxDamage;
+    }
+
+
     // Construtor
     public Entidade(int hp, int maxHp, int X, int Y)
     {

@@ -144,6 +144,11 @@ public class Posicao
         get => leftDistance;
     }
 
+    public int? HitboxDamage
+    {
+        get => hitBox.HitboxDamage;
+    }
+
 
     // Construtor
     public Posicao(int X, int Y, int altura, int largura, int maxSpeedX=10, int maxSpeedY=10, int speedX=0, int speedY=0, int gravidadeY=1, int gravidadeX=0)
@@ -184,7 +189,10 @@ public class Posicao
             if (inimigo.Left < Right && inimigo.Right > Left &&
                 inimigo.Top < Bottom && inimigo.Bottom > Top)
             {
+                if (inimigo.HitboxDamage == null)
+                    continue;
 
+                
             }
         }
     }

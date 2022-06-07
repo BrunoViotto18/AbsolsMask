@@ -6,6 +6,11 @@ public class HitBox
     private int largura;
     private int? dano;
 
+    public int? HitboxDamage
+    {
+        get => dano;
+    }
+
     public int Altura
     {
         get => altura;

@@ -48,6 +48,11 @@ public class ActionManager
         get => posicao.Left;
     }
 
+    public int? HitboxDamage
+    {
+        get => posicao.HitboxDamage;
+    }
+
 
     public ActionManager(int X, int Y)
     {
