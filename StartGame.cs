@@ -74,5 +74,10 @@ namespace AbsolsMask
                 this.Close();
             }
         }
+
+        private void btOptions_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

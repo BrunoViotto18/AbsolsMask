@@ -98,6 +98,7 @@
             this.btOptions.TabIndex = 6;
             this.btOptions.Text = "Options";
             this.btOptions.UseVisualStyleBackColor = false;
+            this.btOptions.Click += new System.EventHandler(this.btOptions_Click);
             // 
             // StartGame
             // 
