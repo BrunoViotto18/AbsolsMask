@@ -7,6 +7,19 @@ public abstract class Entidade
     protected ActionManager actionManager;
 
     // GET & SET
+    public int Hp
+    {
+        get => hp;
+        set
+        {
+            hp = value;
+            if (hp > maxHP)
+                hp = maxHP;
+            else if (hp <= 0)
+                MessageBox.Show("Game Over");
+        }
+    }
+
     public int X
     {
         get => this.actionManager.X;
@@ -54,6 +67,19 @@ public abstract class Entidade
         this.hp = hp;
         this.maxHP = maxHp;
         this.actionManager = new ActionManager(X, Y);
+    }
+
+    public virtual void CalculateSelfCollision(Entidades entidades)
+    {
+        var entidade = actionManager.CalculateEntityCollision(entidades.Inimigos.ToArray());
+
+        if (entidade == null)
+            return;
+
+        if (entidade.HitboxDamage == null)
+            return;
+
+        Hp = Hp - (int)entidade.HitboxDamage;
     }
 
     public void CalculateSelfMoviment(Bloco[,] blocos, Entidades entidades)

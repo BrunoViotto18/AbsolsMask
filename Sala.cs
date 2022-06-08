@@ -81,6 +81,11 @@ public class Sala
             inimigo.CalculateSelfMoviment(this.blocos, this.entidades);
     }
 
+    public void CalculateEntitiesCollision()
+    {
+        this.entidades.Player.CalculateSelfCollision(entidades);
+    }
+
 
     /* Métodos renderizadores */
 

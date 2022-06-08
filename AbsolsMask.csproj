@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Update="Properties\Entidades\InimigoGatoArabe.Designer.cs">
       <DependentUpon>InimigoGatoArabe.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -22,6 +23,10 @@
     </Compile>
     <Compile Update="Properties\Entidades\Inimigo.Designer.cs">
       <DependentUpon>Inimigo.resx</DependentUpon>
+=======
+    <Compile Update="Properties\Entidades\Goomba.Designer.cs">
+      <DependentUpon>Goomba.resx</DependentUpon>
+>>>>>>> ad639325441cd7108e4d96c03c2337194f06c82f
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
@@ -58,12 +63,17 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <EmbeddedResource Update="Properties\Entidades\InimigoGatoArabe.resx">
       <LastGenOutput>InimigoGatoArabe.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\Entidades\Inimigo.resx">
       <LastGenOutput>Inimigo.Designer.cs</LastGenOutput>
+=======
+    <EmbeddedResource Update="Properties\Entidades\Goomba.resx">
+      <LastGenOutput>Goomba.Designer.cs</LastGenOutput>
+>>>>>>> ad639325441cd7108e4d96c03c2337194f06c82f
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\Songs.resx">

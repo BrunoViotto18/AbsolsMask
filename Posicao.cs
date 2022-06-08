@@ -151,7 +151,7 @@ public class Posicao
 
 
     // Construtor
-    public Posicao(int X, int Y, int altura, int largura, int maxSpeedX=10, int maxSpeedY=10, int speedX=0, int speedY=0, int gravidadeY=1, int gravidadeX=0)
+    public Posicao(int X, int Y, int altura, int largura, int? HitBoxDamage=null, int maxSpeedX=10, int maxSpeedY=8, int speedX=0, int speedY=0, int gravidadeY=1, int gravidadeX=0)
     {
         this.x = X;
         this.y = Y;
@@ -161,7 +161,7 @@ public class Posicao
         this.speedY = speedY;
         this.gravidadeX = gravidadeX;
         this.gravidadeY = gravidadeY;
-        this.hitBox = new HitBox(altura, largura);
+        this.hitBox = new HitBox(altura, largura, HitBoxDamage);
     }
 
 
@@ -182,19 +182,9 @@ public class Posicao
     }
 
 
-    public void calculateEntityCollision(Entidades entidades, bool recoil)
+    public Entidade? CalculateEntityCollision(Entidade[] entidades)
     {
-        foreach (var inimigo in entidades.Inimigos)
-        {
-            if (inimigo.Left < Right && inimigo.Right > Left &&
-                inimigo.Top < Bottom && inimigo.Bottom > Top)
-            {
-                if (inimigo.HitboxDamage == null)
-                    continue;
-
-                
-            }
-        }
+        return entidades.FirstOrDefault(i => i.Left < Right && i.Right > Left && i.Top < Bottom && i.Bottom > Top && i.HitboxDamage != null);
     }
 
 
@@ -454,7 +444,7 @@ public class Posicao
     }
 
     // Calcula o movimento da entidade
-    public void CalculateMoviment(Bloco[,] blocos, Entidades entidades)
+    public void CalculateMoviment(Bloco[,] blocos, Entidades entidades, bool recoil)
     {
         calculateGravity();
 
