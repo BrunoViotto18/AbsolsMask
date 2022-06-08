@@ -27,7 +27,11 @@ public class Sala
     public Sala(Bitmap backgorund)
     {
         this.entidades = new Entidades(new Player(10, 10, 150, 150));
-        this.entidades.addEnemy(new Goomba(10, 10, 200, 200));
+        for(int c = 0; c < 5; c++)
+        {
+            this.entidades.addEnemy(new Goomba(10, 10, 100 + c * 300, 100 + c * 250));
+        }
+        this.entidades.addEnemy(new GatoArabe(10, 10, 1000, 100));
         this.salaImage = Properties.Salas.Teste;
         this.salaBackground = backgorund;
         buildRoom();

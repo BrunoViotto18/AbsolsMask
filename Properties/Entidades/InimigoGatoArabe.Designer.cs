@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AbsolsMask.Properties {
+namespace AbsolsMask.Properties.Entidades {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace AbsolsMask.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Background {
+    internal class InimigoGatoArabe {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Background() {
+        internal InimigoGatoArabe() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace AbsolsMask.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AbsolsMask.Properties.Background", typeof(Background).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AbsolsMask.Properties.Entidades.InimigoGatoArabe", typeof(InimigoGatoArabe).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,9 +63,9 @@ namespace AbsolsMask.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap fundo1 {
+        internal static System.Drawing.Bitmap GatoEndJump {
             get {
-                object obj = ResourceManager.GetObject("fundo1", resourceCulture);
+                object obj = ResourceManager.GetObject("GatoEndJump", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace AbsolsMask.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap fundo2 {
+        internal static System.Drawing.Bitmap GatoIdle {
             get {
-                object obj = ResourceManager.GetObject("fundo2", resourceCulture);
+                object obj = ResourceManager.GetObject("GatoIdle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,19 +83,9 @@ namespace AbsolsMask.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap fundo3 {
+        internal static System.Drawing.Bitmap GatoStartJump {
             get {
-                object obj = ResourceManager.GetObject("fundo3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Trevisan {
-            get {
-                object obj = ResourceManager.GetObject("Trevisan", resourceCulture);
+                object obj = ResourceManager.GetObject("GatoStartJump", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

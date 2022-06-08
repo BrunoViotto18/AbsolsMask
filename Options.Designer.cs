@@ -61,7 +61,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::AbsolsMask.Properties.Background.luis;
+            this.pictureBox1.Image = global::AbsolsMask.Properties.Background.fundo1;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(180, 119);
@@ -71,7 +71,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::AbsolsMask.Properties.Background.leo;
+            this.pictureBox2.Image = global::AbsolsMask.Properties.Background.fundo2;
             this.pictureBox2.Location = new System.Drawing.Point(211, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(180, 119);
@@ -91,7 +91,7 @@
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Image = global::AbsolsMask.Properties.Background.bizio;
+            this.pictureBox4.Image = global::AbsolsMask.Properties.Background.fundo3;
             this.pictureBox4.Location = new System.Drawing.Point(608, 12);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(180, 119);

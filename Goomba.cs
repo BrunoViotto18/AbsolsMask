@@ -7,14 +7,4 @@ public class Goomba : Entidade
     {
         this.actionManager = new GoombaIA(X, Y);
     }
-
-    private void RenderBody()
-    {
-
-    }
-
-    private void RenderMask()
-    {
-
-    }
 }

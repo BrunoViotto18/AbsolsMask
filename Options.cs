@@ -21,13 +21,13 @@ namespace AbsolsMask
 
         private void bt1_Click(object sender, EventArgs e)
         {
-            bitmap = Properties.Background.luis;
+            bitmap = Properties.Background.fundo1;
             this.Close();
         }
 
         private void bt2_Click(object sender, EventArgs e)
         {
-            bitmap = Properties.Background.leo;
+            bitmap = Properties.Background.fundo2;
             this.Close();
         }
 
@@ -39,7 +39,7 @@ namespace AbsolsMask
 
         private void bt4_Click(object sender, EventArgs e)
         {
-            bitmap = Properties.Background.bizio;
+            bitmap = Properties.Background.fundo3;
             this.Close();
         }
 
