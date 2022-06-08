@@ -8,6 +8,7 @@ public class ActionManager
     protected Action currentAction;
     protected Posicao posicao;
     protected Direction direcao;
+    protected bool Recoil;
 
     private bool doubleJump;
     private bool dash;
@@ -164,16 +165,22 @@ public class ActionManager
     }
 
 
-    // Calcula a qunatidade de movimento da ação
+    // Calcula a quantidade de movimento da ação
     public void RunCurrentAction()
     {
         currentAction.RunAction(posicao, direcao);
     }
 
+    // Calcula a colisão
+    public Entidade? CalculateEntityCollision(Entidade[] entidades)
+    {
+        return posicao.CalculateEntityCollision(entidades);
+    }
+
     // Calcula o movimentação da ação
     public void CalculateActionMoviment(Bloco[,] blocos, Entidades entidades)
     {
-        this.posicao.CalculateMoviment(blocos, entidades);
+        this.posicao.CalculateMoviment(blocos, entidades, Recoil);
     }
 
     // Renderiza a ação

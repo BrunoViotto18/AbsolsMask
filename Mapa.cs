@@ -27,7 +27,8 @@ public class Mapa
     // Calcula os movimentos do jogo
     public void CalculateMapMoviments()
     {
-        this.salaAtual.CalculateEntitiesMoviment();
+        salaAtual.CalculateEntitiesMoviment();
+        salaAtual.CalculateEntitiesCollision();
     }
 
     public void RenderMapaBackground(Graphics gSala)

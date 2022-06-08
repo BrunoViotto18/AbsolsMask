@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\Entidades\Inimigo.Designer.cs">
-      <DependentUpon>Inimigo.resx</DependentUpon>
+    <Compile Update="Properties\Entidades\Goomba.Designer.cs">
+      <DependentUpon>Goomba.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
@@ -53,8 +53,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Properties\Entidades\Inimigo.resx">
-      <LastGenOutput>Inimigo.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Properties\Entidades\Goomba.resx">
+      <LastGenOutput>Goomba.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\Songs.resx">
