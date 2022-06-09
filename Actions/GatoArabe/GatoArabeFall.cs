@@ -9,7 +9,20 @@ public class GatoArabeFall : Action
 
     public override void RunAction(Posicao posicao, Direction direction)
     {
-        
+
+        switch (direction)
+        {
+            case Direction.Left:
+                posicao.SpeedX = -5;
+                break;
+
+            case Direction.Right:
+                posicao.SpeedX = 5;
+                break;
+        }
+
+        if (posicao.BottomDistance <= 0)
+            prioridade = -1;
     }
 
     public override Action Reset(Posicao posicao)

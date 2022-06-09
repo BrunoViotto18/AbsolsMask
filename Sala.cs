@@ -31,7 +31,11 @@ public class Sala
         {
             this.entidades.addEnemy(new Goomba(10, 10, 100 + c * 300, 100 + c * 250));
         }
-        this.entidades.addEnemy(new GatoArabe(10, 10, 1000, 100));
+        for (int c = 0; c < 5; c++)
+        {
+            this.entidades.addEnemy(new GatoArabe(10, 10, 200 + c * 300, 100 + c * 250));
+        }
+        
         this.salaImage = Properties.Salas.Teste;
         this.salaBackground = backgorund;
         buildRoom();

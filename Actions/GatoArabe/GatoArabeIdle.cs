@@ -2,7 +2,7 @@
 
 public class GatoArabeIdle : Action
 {
-    int maxTime = 60;
+    int maxTime = 120;
     public GatoArabeIdle(Bitmap spritesheet, int[] spriteTime) : base(spritesheet, spriteTime)
     {
         this.prioridade = 1;

@@ -33,19 +33,27 @@ namespace AbsolsMask
             using (var client = new HttpClient(httpClientHandler))
             {
                 client.BaseAddress = new Uri("https://absolsmaks.azurewebsites.net/");
-                var existe = await client.GetAsync($"User/login/{tbLogin.Text}/{tbSenha.Text}");
-                if (await existe.Content.ReadAsStringAsync() != "0")
+                
+                if(tbLogin.Text != "" && tbSenha.Text != "")
                 {
-                    var result = await client.PostAsync($"User/login/{tbLogin.Text}/{tbSenha.Text}", null);
-                    string resultContent = await result.Content.ReadAsStringAsync();
-                    StartGame novo = new StartGame(resultContent);
-                    this.Hide();
-                    novo.ShowDialog();
-                    this.Close();
+                    var existe = await client.GetAsync($"User/login/{tbLogin.Text}/{tbSenha.Text}");
+                    if (await existe.Content.ReadAsStringAsync() != "0")
+                    {
+                        var result = await client.PostAsync($"User/login/{tbLogin.Text}/{tbSenha.Text}", null);
+                        string resultContent = await result.Content.ReadAsStringAsync();
+                        StartGame novo = new StartGame(resultContent);
+                        this.Hide();
+                        novo.ShowDialog();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Usuario não cadastrado");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Usuario não cadastrado");
+                    MessageBox.Show("Não tem mais login vazio 😎 .");
                 }
             }
         }

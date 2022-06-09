@@ -11,19 +11,22 @@ public class GatoArabeJump : Action
 
     public override void RunAction(Posicao posicao, Direction direction)
     {
-        if (!FirstFrame)
-            return;
+        if (posicao.SpeedY >= 0)
+            prioridade = -1;
 
         switch (direction)
         {
             case Direction.Left:
-                posicao.SpeedX = -2;
+                posicao.SpeedX = -5;
                 break;
 
             case Direction.Right:
-                posicao.SpeedX = 2;
+                posicao.SpeedX = 5;
                 break;
         }
+
+        if (!FirstFrame)
+            return;
 
         posicao.SpeedY = -8;
 
