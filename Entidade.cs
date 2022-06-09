@@ -7,7 +7,7 @@ public abstract class Entidade
     protected ActionManager actionManager;
 
     // GET & SET
-    public int Hp
+    public virtual int Hp
     {
         get => hp;
         set
@@ -16,7 +16,7 @@ public abstract class Entidade
             if (hp > maxHP)
                 hp = maxHP;
             else if (hp <= 0)
-                MessageBox.Show("Game Over");
+                hp = 0;
         }
     }
 
@@ -60,6 +60,11 @@ public abstract class Entidade
         get => actionManager.HitboxDamage;
     }
 
+    public ActionManager ActionManager
+    {
+        get => actionManager;
+    }
+
 
     // Construtor
     public Entidade(int hp, int maxHp, int X, int Y)
@@ -91,6 +96,12 @@ public abstract class Entidade
 
     public void RenderAction(Graphics g)
     {
-        this.actionManager.RenderCurrentAction(g);
+        actionManager.RenderCurrentAction(g);
+    }
+
+    public void Dead()
+    {
+        actionManager.Posicao.SpeedY = -2;
+        actionManager.Posicao.Y += actionManager.Posicao.SpeedY;
     }
 }

@@ -31,7 +31,7 @@ public class Posicao
     public int Y
     {
         get => y;
-        private set => y = value;
+        set => y = value;
     }
 
 
