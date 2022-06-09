@@ -10,10 +10,9 @@ public class GatoArabeIA : ActionManager
         actions.Add(new GatoArabeFall(Properties.Entidades.InimigoGatoArabe.GatoEndJump, new int[] { 5 }));
         actions.Add(new GatoArabeJump(Properties.Entidades.InimigoGatoArabe.GatoStartJump, new int[] { 5 }));
         posicao = new Posicao(X, Y, 32 , 41, 1);
-
-
         currentAction = actions[0];
         direcao = Direction.Right;
+        recoil = false;
     }
 
     public override void CalculateAction()

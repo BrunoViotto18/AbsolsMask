@@ -9,9 +9,9 @@ public class GoombaIA : ActionManager
         actions.Add(new GoombaWalk(Properties.Entidades.Goomba.Walk, new int[] { 5, 5, 5 }));
         posicao = new Posicao(X, Y, 30, 50, 1);
 
-
         currentAction = actions[0];
         direcao = Direction.Right;
+        recoil = false;
     }
 
     public override void CalculateAction()
@@ -21,6 +21,4 @@ public class GoombaIA : ActionManager
         else if (posicao.LeftDistance == 0)
             direcao = Direction.Right;
     }
-
-    
 }

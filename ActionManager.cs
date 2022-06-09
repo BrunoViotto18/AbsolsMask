@@ -8,8 +8,9 @@ public class ActionManager
     protected Action currentAction;
     protected Posicao posicao;
     protected Direction direcao;
-    protected bool Recoil;
+    protected bool recoil;
     protected bool dead = false;
+    protected int invincible = 0;
 
     private bool doubleJump;
     private bool dash;
@@ -84,6 +85,7 @@ public class ActionManager
         direcao = Direction.Right;
         doubleJump = true;
         dash = true;
+        recoil = true;
     }
 
 
@@ -193,18 +195,31 @@ public class ActionManager
     // Calcula a colisão
     public Entidade? CalculateEntityCollision(Entidade[] entidades)
     {
-        return posicao.CalculateEntityCollision(entidades);
+        var entidade = posicao.CalculateEntityCollision(entidades);
+
+        if (recoil && entidade != null)
+        {
+            int x = posicao.X - entidade.X;
+            int y = posicao.Y - entidade.Y;
+
+            posicao.SpeedX = x / Math.Abs(x) * x/y;
+            posicao.SpeedY = y / Math.Abs(y) * y/x;
+        }
+
+
+        return entidade;
     }
 
     // Calcula o movimentação da ação
     public void CalculateActionMoviment(Bloco[,] blocos, Entidades entidades)
     {
-        this.posicao.CalculateMoviment(blocos, entidades, Recoil);
+        this.posicao.CalculateMoviment(blocos, entidades);
     }
 
     // Renderiza a ação
     public void RenderCurrentAction(Graphics g)
     {
-        this.currentAction.RenderActionSprite(posicao, g, direcao);
+        if (invincible % 6 < 4)
+            currentAction.RenderActionSprite(posicao, g, direcao);
     }
 }
