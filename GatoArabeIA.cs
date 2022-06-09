@@ -5,15 +5,16 @@ public class GatoArabeIA : ActionManager
 
     public GatoArabeIA(int X, int Y) : base(X, Y)
     {
-        this.actions = new List<Action>();
+        actions = new List<Action>();
         actions.Add(new GatoArabeJump(Properties.Entidades.InimigoGatoArabe.GatoIdle, new int[] { 5 }));
         actions.Add(new GatoArabeJump(Properties.Entidades.InimigoGatoArabe.GatoEndJump, new int[] { 5 }));
         actions.Add(new GatoArabeJump(Properties.Entidades.InimigoGatoArabe.GatoStartJump, new int[] { 5 }));
-        this.posicao = new Posicao(X, Y, 32 ,41);
+        posicao = new Posicao(X, Y, 32 ,41);
 
 
         currentAction = actions[0];
         direcao = Direction.Right;
+        recoil = false;
     }
 
     public override void CalculateAction()

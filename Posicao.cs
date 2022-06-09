@@ -444,7 +444,7 @@ public class Posicao
     }
 
     // Calcula o movimento da entidade
-    public void CalculateMoviment(Bloco[,] blocos, Entidades entidades, bool recoil)
+    public void CalculateMoviment(Bloco[,] blocos, Entidades entidades)
     {
         calculateGravity();
 
