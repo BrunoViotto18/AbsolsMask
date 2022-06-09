@@ -76,9 +76,18 @@ public class Sala
 
     public void CalculateEntitiesMoviment()
     {
-        this.entidades.Player.CalculateSelfMoviment(this.blocos, this.entidades);
+        if (entidades.Player.Hp > 0)
+            entidades.Player.CalculateSelfMoviment(this.blocos, this.entidades);
+        else
+        {
+            entidades.Player.ActionManager.Dead = true;
+            entidades.Player.ActionManager.CalculateAction();
+            entidades.Player.Dead();
+        }
+
         foreach (var inimigo in entidades.Inimigos)
-            inimigo.CalculateSelfMoviment(this.blocos, this.entidades);
+            if (inimigo.Hp > 0)
+                inimigo.CalculateSelfMoviment(this.blocos, this.entidades);
     }
 
     public void CalculateEntitiesCollision()
@@ -152,8 +161,10 @@ public class Sala
     // Renderiza as entidades
     private void RenderEntities(Graphics g)
     {
-        this.entidades.Player.RenderAction(g);
+        entidades.Player.RenderAction(g);
+
         foreach (var inimigo in entidades.Inimigos)
-            inimigo.RenderAction(g);
+            if (inimigo.Hp > 0)
+                inimigo.RenderAction(g);
     }
 }

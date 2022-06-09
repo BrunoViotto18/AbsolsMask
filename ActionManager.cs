@@ -9,6 +9,7 @@ public class ActionManager
     protected Posicao posicao;
     protected Direction direcao;
     protected bool Recoil;
+    protected bool dead = false;
 
     private bool doubleJump;
     private bool dash;
@@ -49,9 +50,20 @@ public class ActionManager
         get => posicao.Left;
     }
 
+    public Posicao Posicao
+    {
+        get => posicao;
+    }
+
     public int? HitboxDamage
     {
         get => posicao.HitboxDamage;
+    }
+
+    public bool Dead
+    {
+        get => dead;
+        set => dead = value;
     }
 
 
@@ -59,13 +71,14 @@ public class ActionManager
     {
         this.posicao = new Posicao(X, Y, 56, 20);
 
-        this.actions.Add(new Idle(Properties.Entidades.Player.Idle, new int[] { 8, 8, 8 }));
-        this.actions.Add(new Walk(Properties.Entidades.Player.Walk, new int[] { 5, 5, 5, 5 }));
-        this.actions.Add(new Run(Properties.Entidades.Player.Run, new int[] { 5, 5, 5, 5 }));
-        this.actions.Add(new Fall(Properties.Entidades.Player.Fall, new int[] { 5, 5, 5, 5 }));
-        this.actions.Add(new Jump(Properties.Entidades.Player.Jump, new int[] { 3, 3, 5, 5 }));
-        this.actions.Add(new Attack(Properties.Entidades.Player.Attack, new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }));
-        this.actions.Add(new Dash(Properties.Entidades.Player.Dash, new int[] { 3, 3 }));
+        actions.Add(new Idle(Properties.Entidades.Player.Idle, new int[] { 8, 8, 8 }));
+        actions.Add(new Walk(Properties.Entidades.Player.Walk, new int[] { 5, 5, 5, 5 }));
+        actions.Add(new Run(Properties.Entidades.Player.Run, new int[] { 5, 5, 5, 5 }));
+        actions.Add(new Fall(Properties.Entidades.Player.Fall, new int[] { 5, 5, 5, 5 }));
+        actions.Add(new Jump(Properties.Entidades.Player.Jump, new int[] { 3, 3, 5, 5 }));
+        actions.Add(new Attack(Properties.Entidades.Player.Attack, new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }));
+        actions.Add(new Dash(Properties.Entidades.Player.Dash, new int[] { 3, 3 }));
+        actions.Add(new Dead(Properties.Entidades.Player.Dead, new int[] { 1 }));
 
         currentAction = actions[0];
         direcao = Direction.Right;
@@ -103,6 +116,12 @@ public class ActionManager
 
         /* Calcular ação */
         
+        if (Dead && currentAction.Prioridade < 7)
+        {
+            currentAction.Reset(Posicao);
+            currentAction = actions[7];
+        }
+
         // Dash
         if (KeyPressManager.KeysPressed.Contains(Keys.A) && dash && currentAction.Prioridade < 6)
         {

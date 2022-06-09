@@ -9,14 +9,4 @@ public class Player : Entidade
     {
 
     }
-
-    private void RenderBody()
-    {
-
-    }
-
-    private void RenderMask()
-    {
-
-    }
 }
