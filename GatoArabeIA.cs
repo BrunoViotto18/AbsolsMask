@@ -6,8 +6,8 @@ public class GatoArabeIA : ActionManager
     public GatoArabeIA(int X, int Y) : base(X, Y)
     {
         this.actions = new List<Action>();
-        actions.Add(new GatoArabeJump(Properties.Entidades.InimigoGatoArabe.GatoIdle, new int[] { 5 }));
-        actions.Add(new GatoArabeJump(Properties.Entidades.InimigoGatoArabe.GatoEndJump, new int[] { 5 }));
+        actions.Add(new GatoArabeIdle(Properties.Entidades.InimigoGatoArabe.GatoIdle, new int[] { 5 }));
+        actions.Add(new GatoArabeFall(Properties.Entidades.InimigoGatoArabe.GatoEndJump, new int[] { 5 }));
         actions.Add(new GatoArabeJump(Properties.Entidades.InimigoGatoArabe.GatoStartJump, new int[] { 5 }));
         this.posicao = new Posicao(X, Y, 32 ,41);
 
@@ -29,6 +29,11 @@ public class GatoArabeIA : ActionManager
             {
                 currentAction.Reset(posicao);
                 currentAction = actions[0];
+            }
+            else if (currentAction.Prioridade == -1)
+            {
+                currentAction.Reset(posicao);
+                currentAction = actions[2];
             }
         }
         else
