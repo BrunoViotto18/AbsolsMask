@@ -1,5 +1,4 @@
 namespace AbsolsMask;
-
 using System.Reflection;
 
 public class ActionManager
@@ -11,6 +10,8 @@ public class ActionManager
     protected bool recoil;
     protected bool dead = false;
     protected int invincible = 0;
+
+    Songs novo = new Songs();
 
     private bool doubleJump;
     private bool dash;
@@ -67,7 +68,7 @@ public class ActionManager
         set => dead = value;
     }
 
-
+    
     public ActionManager(int X, int Y)
     {
         this.posicao = new Posicao(X, Y, 56, 20);
@@ -120,6 +121,7 @@ public class ActionManager
         
         if (Dead && currentAction.Prioridade < 7)
         {
+            novo.playDead();
             currentAction.Reset(Posicao);
             currentAction = actions[7];
         }
@@ -201,9 +203,11 @@ public class ActionManager
         {
             int x = posicao.X - entidade.X;
             int y = posicao.Y - entidade.Y;
-
-            posicao.SpeedX = x / Math.Abs(x) * x/y;
-            posicao.SpeedY = y / Math.Abs(y) * y/x;
+            if(x != 0 && y != 0)
+            {
+                posicao.SpeedX = x / Math.Abs(x) * x / y;
+                posicao.SpeedY = y / Math.Abs(y) * y / x;
+            }
         }
 
 

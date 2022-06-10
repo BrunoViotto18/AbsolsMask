@@ -68,5 +68,14 @@ namespace AbsolsMask.Properties {
                 return ResourceManager.GetStream("SongOfStorms", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.IO.UnmanagedMemoryStream semelhante a System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream zelda {
+            get {
+                return ResourceManager.GetStream("zelda", resourceCulture);
+            }
+        }
     }
 }

@@ -21,7 +21,8 @@ public class Game : Form
     private PictureBox pbTela;
 
     Bitmap background;
-
+    
+    
 
     // GET & SET
     public Random RNG
@@ -36,7 +37,6 @@ public class Game : Form
     {
         this.seed = seed;
         this.background = background;
-
         InitializeComponent();
     }
 
@@ -176,8 +176,6 @@ public class Game : Form
             RenderCamera(bmpSala, gCamera);
             pbTela.Image = bmpCamera;
         };
-
-        new System.Media.SoundPlayer(Properties.Songs.SongOfStorms).Play();
 
         this.tm.Start();
     }
