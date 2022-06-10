@@ -2,11 +2,16 @@
 
 public class GatoArabeJump : Action
 {
-    bool FirstFrame;
+    int FirstFrame;
+    int speedLeft;
+    int speedRight;
+
     public GatoArabeJump(Bitmap spritesheet, int[] spriteTime) : base(spritesheet, spriteTime)
     {
-        this.FirstFrame = true;
+        this.FirstFrame = 8;
         this.prioridade = 3;
+        speedLeft = new Random().Next(-7, -1);
+        speedRight = new Random().Next(1, 7);
     }
 
     public override void RunAction(Posicao posicao, Direction direction)
@@ -17,28 +22,30 @@ public class GatoArabeJump : Action
         switch (direction)
         {
             case Direction.Left:
-                posicao.SpeedX = -5;
+                posicao.SpeedX = speedLeft;
                 break;
 
             case Direction.Right:
-                posicao.SpeedX = 5;
+                posicao.SpeedX = speedRight;
                 break;
         }
 
-        if (!FirstFrame)
+        if (FirstFrame <= 0)
             return;
 
         posicao.SpeedY = -8;
 
-        FirstFrame = false;
+        FirstFrame--;
     }
     public override Action Reset(Posicao posicao)
     {
         prioridade = 3;
         currentSprite = 0;
         spriteDelay = 0;
-        FirstFrame = true;
+        FirstFrame = 8;
         changeDirection = true;
+        speedLeft = new Random().Next(-7, -1);
+        speedRight = new Random().Next(1, 7);
         return this;
     }
 }
